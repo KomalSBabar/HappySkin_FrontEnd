@@ -1,0 +1,56 @@
+<!-- <p>setpharmacy works!</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8dEmVejgTeo" title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe> -->
+
+<div class="container" style="align-items: center;padding-left: 373px;padding-right: 600px;  ">
+    <div id="div1">
+        <div class="block-part1">
+            <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+            <a id="back1" class="back_word" (click)="pharmacy_depression()">Back</a>
+        </div>
+
+        <div class="block-part2">
+
+            <form [formGroup]="formgroup1">
+                <h3 style="color: black; font-weight: bold;">Choose your pharmacy
+                </h3>
+
+                <h5 style="color: black; font-weight: bold;">yt video
+                </h5>
+                <!-- <iframe src="https://youtu.be/OW9fBf0Crl0" height="400" width="500">
+                    </iframe> -->
+
+
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/8dEmVejgTeo"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+
+                <p>We strongly recommend calling your insurance company to determine if Accutane is covered and how much
+                    you’ll pay for medication. Often times, our direct cash pricing is cheaper and shipping is free!</p>
+                <br>
+
+
+
+
+                <div class="block-part2">
+                    <div class="block3">
+                        <button class=" formsubmit_come   m-4" (click)="continue()">continue</button>
+                    </div>
+                </div>
+
+                <span class="text-danger" *ngIf=error>
+                    this field is required
+                </span>
+
+
+            </form>
+        </div>
+
+
+
+    </div>
+
+</div>

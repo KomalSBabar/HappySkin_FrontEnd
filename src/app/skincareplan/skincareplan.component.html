@@ -1,0 +1,124 @@
+<div class="container" style="align-items: center;padding-left: 373px;padding-right: 600px;  ">
+
+    <div id="div1">
+        <div class="block-part1">
+            <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+            <a id="back1" class="back_word" (click)="skincare_back_question()">Back</a>
+        </div>
+
+        <div class="block-part2">
+            <h3 style="color: black; font-weight: bold;">Potential Treatment Options
+            </h3>
+            <p>Based on your answers to the previous questions, here’s the prescription that may be best for your acne.
+                This is only a suggestion, and you can decide to be evaluated for the alternative option.</p>
+            <h5 style="color: black; font-weight: bold;">For all treatments, your initial visit is FREE if not approved
+                for a prescription.
+            </h5>
+
+            <img src="./assets/images/img-2.png" alt="" style="height:85px;"> static image <br>
+
+            <h3 style="color: black; font-weight: bold;">Customized Cream
+            </h3>
+            <p>$20 Initial Telemedicine Evaluation Fee. Ships every 2 months at $30/mo.</p><br>
+            <p>A prescription grade topical cream tailored to your skin by your board certified dermatologist.</p>
+
+
+            <!-- MODEL KHULWANEKA HAI IDHAR -->
+            <p><a href="" data-toggle="modal" data-target="#modal1"       >LEARN MORE</a></p>
+
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come   m-4" (click)="topical()">Select</button>
+                </div>
+            </div>
+
+        </div>
+        <!-- alternate option -->
+        <div class="block-part2">
+            <h3 style="color: black; font-weight: bold;">Alternative option
+            </h3>
+            <img src="./assets/images/img-2.png" alt="" style="height:85px;"> static image of accutane <br>
+
+            <h5 style="color: black; font-weight: bold;">Accutane
+            </h5>
+            <p>Requires detailed, monthly evaluations at $59/mo. With insurance, medication costs can be as low as your
+                copay. If you don’t have insurance, monthly medication costs will depend on your dosage which we’ll
+                estimate in the next few steps.</p><br>
+            <p>An oral medication taken for 5-6 months that can provide permanent clearing of acne symptoms.</p>
+
+            <!-- MODEL KHULWANEKA HAI IDHAR -->
+            <p><a href="" data-toggle="modal" data-target="#modal2"     >LEARN MORE</a></p>
+
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come   m-4"  (click)="reminder()"     >Select</button>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+  
+  <!-- Modal 1-->
+  <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+       
+                <h5 class="modal-title" id="exampleModalLongTitle">Customized Cream <br>  Shipped every 2 months - cancel anytime.     </h5><br>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+   
+        
+        </div>
+       
+        <div class="modal-body">
+            <img src="./assets/images/img-2.png" alt="" style="height: 208px; padding-left: 182px;"> static image <br>
+        </div>
+        <div class="modal-footer">
+            <span aria-hidden="true"> Your prescription cream will contain a combination of time tested ingredients such as Tretinoin, Niacinamide, Clindamycin, or Azelaic Acid to help combat inflammation while killing acne bacteria. Most patients start seeing markedly clear skin after 4 months of treatment.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- modal 2 -->
+  <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Accutane</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <img src="./assets/images/img-2.png" alt="" style="height: 208px; padding-left: 182px;"> static image of accutane <br>
+        </div>
+        <div class="modal-footer">
+            <span aria-hidden="true">Accutane (Isotretinoin) is an oral medication that’s typically taken for 6-7 months. Most people get completely clear after a single course of treatment.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

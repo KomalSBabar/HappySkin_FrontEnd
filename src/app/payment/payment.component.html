@@ -1,0 +1,387 @@
+<section class="checkout-page">
+    <div class="container">
+        <div class="backbutton">
+            <p [routerLink]="(['/shippingcart'])"><img class="img-fluid" src="assets/images/Iconleft.png"
+                    alt="back cart"> <span>
+                    &nbsp; Back</span>
+            </p>
+        </div>
+        <div class="options-ship">
+            <ul>
+
+                <li><a class="checkout-list-text active" [routerLink]="(['/shippingcart'])">1. Shipping</a></li>
+                <li><a class="checkout-list-text">2. Payment</a></li>
+
+
+            </ul>
+        </div>
+
+
+
+        <section>
+            <div class="container py-5 h-100">
+                <div class="row d-flex align-items-center justify-content-center h-100">
+
+                    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                        <form [formGroup]="paymentformgroup">
+
+                            <h1 style="padding:25px">Payment </h1>
+                            <!-- cardnumber -->
+                            <div class="form-group" id="card_number" ><label >Card Number</label>
+                                <input id="card_number"   type="text" placeholder="1234 1234 1234 1234"
+                                    class="form-control form-control-lg"/>
+                                    
+                                    <!-- formControlName="cardnumber" -->
+                                    <!-- [ngClass]="{'is-invalid':submitted && paymentFormControl['cardnumber'].errors }" />
+                                <span class="text-danger"
+                                    *ngIf="paymentFormControl.cardnumber.touched && paymentFormControl.cardnumber.errors?.required">
+                                    field is required
+                                </span>
+                                <span class="text-danger"
+                                    *ngIf="paymentFormControl.cardnumber.touched && paymentFormControl.cardnumber.errors?.maxlength">
+                                    City must be at 16 digit long.
+                                </span> -->
+                            </div>
+
+
+                            <!-- name on card-->
+                            <div class="form-outline mb-4">
+                                <input type="text" placeholder="Name on card" class="form-control form-control-lg"
+                                    formControlName="cardname"/>
+                                    <!-- [ngClass]="{'is-invalid':submitted && paymentFormControl['cardname'].errors }" /> -->
+                                <!-- <span class="text-danger"
+                                    *ngIf="paymentFormControl.cardname.touched && paymentFormControl.cardname.errors?.required">
+                                    field is required
+                                </span> -->
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-sm-6 pr-7 res-767-pr-15"   id="card_expiry"    >
+
+                                    <label>Expiry
+                                        Date</label>
+
+
+                                    <!-- <input bsDatepicker value="{{ bsCurDate | date:'MM-yyyy' }}"
+                                        [bsConfig]="{ containerClass: 'theme-primary', isAnimated: true, dateInputFormat: 'MM-YYYY' }"
+                                        class="form-control form-control-sm" placeholder="Select Data Date" type="text"
+                                       [required]="true"
+                                        (onShown)="onOpenCalendar($event)"
+                                        [ngClass]="{'is-invalid':submitted && paymentFormControl['expirydate'].errors }" /> -->
+                                        <!-- formControlName="expirydate" -->
+                                   
+                                        <div class="col-sm-6 pr-7 res-767-pr-15">
+                                            <div class="form-group">
+                                                <label>Expiry Date</label>
+                                                <div id="card_expiry"
+                                                    class="form-control form-control-lg">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                    <!-- <span class="text-danger"
+                                        *ngIf="paymentFormControl.expirydate.touched && paymentFormControl.expirydate.errors?.required">
+                                        field is required
+                                    </span> -->
+
+                                </div>
+                                <div class="col-sm-6 pr-7 res-767-pr-15"   id="card_cvc"   >
+
+                                    <label>CVC Code</label>
+                                    <div class="form-group">
+                                        <label>CVC Code</label>
+                                        <div id="card_cvc"
+                                            class="form-control form-control-lg"></div>
+                                    </div>
+
+
+                                    
+
+                                    <!-- <input type="text" placeholder="CVC" class="form-control form-control-lg" 
+                                    
+                                        [ngClass]="{'is-invalid':submitted && paymentFormControl['cvccode'].errors }" /> -->
+                                            <!-- formControlName="cvccode" -->
+                                    <!-- <span class="text-danger"
+                                        *ngIf="paymentFormControl.cvccode.touched && paymentFormControl.cvccode.errors?.required   ">
+                                        field is required
+                                    </span>
+                                    <span class="text-danger"
+                                        *ngIf="paymentFormControl.cvccode.touched && paymentFormControl.cvccode.errors?.maxlength">
+                                        City must be at least 3 digit long.
+                                    </span> -->
+
+                                </div>
+
+                            </div>
+
+                            <h1 style="padding:25px">Billing Address </h1>
+                            <p class="select-textc">Select the address that matches your card or
+                                payment method.</p>
+
+
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" value="same_as_shipping_address"
+                                        type="radio" formControlName="shiping_add" id="flexRadioDefault1"
+                                        (change)="AddBillingAddress_hide($event)">
+                                    <label style="color:black">
+                                        Same as shipping address
+                                    </label>
+                                </div>
+    
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" value="different_billing_address"
+                                        type="radio" formControlName="shiping_add" id="flexRadioDefault1"
+                                        (change)="AddBillingAddress_show($event)">
+                                    <label style="color:black">
+                                        use a different billing addres
+                                    </label>
+    
+    
+    
+                                </div>
+
+                            <div *ngIf="show_billing_block == true">
+
+
+
+                                <!-- first name -->
+                                <div class="form-outline mb-4">
+                                    <input type="text" placeholder="First name" class="form-control form-control-md"
+                                        formControlName="first_name"
+                                        [ngClass]="{'is-invalid':submitted && paymentFormControl['first_name'].errors }" />
+                                    <span class="text-danger"
+                                        *ngIf="paymentFormControl.first_name.touched && paymentFormControl.first_name.errors?.required">
+                                        field is required
+                                    </span>
+
+                                </div>
+
+                                <!-- last name -->
+                                <div class="form-outline mb-4">
+                                    <input type="text" placeholder="last name" class="form-control form-control-md"
+                                        formControlName="last_name"
+                                        [ngClass]="{'is-invalid':submitted && paymentFormControl['last_name'].errors }" />
+
+                                    <span class="text-danger"
+                                        *ngIf="paymentFormControl.last_name.touched && paymentFormControl.last_name.errors?.required">
+                                        field is required
+                                    </span>
+
+                                </div>
+
+
+                                <!-- addres -->
+                                <div class="form-outline mb-4">
+                                    <input type="text" placeholder="Enter your address"
+                                        class="form-control form-control-md" formControlName="addres"
+                                        [ngClass]="{'is-invalid':submitted && paymentFormControl['addres'].errors }" />
+
+                                    <span class="text-danger"
+                                        *ngIf="paymentFormControl.addres.touched && paymentFormControl.addres.errors?.required">
+                                        field is required
+                                    </span>
+
+
+                                </div>
+
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" placeholder="Apt,suite,unit,building,floor,etc."
+                                        class="form-control form-control-lg" formControlName="add_t"
+                                        [ngClass]="{'is-invalid':submitted && paymentFormControl['add_t'].errors }" />
+                                    <span class="text-danger"
+                                        *ngIf="paymentFormControl.add_t.touched && paymentFormControl.add_t.errors?.required">
+                                        field is required
+                                    </span>
+                                </div>
+
+
+                                <!-- city -->
+                                <div class="form-outline mb-4">
+                                    <input type="text" placeholder="City*" class="form-control form-control-lg"
+                                        formControlName="city"
+                                        [ngClass]="{'is-invalid':submitted && paymentFormControl['city'].errors }" />
+                                    <span class="text-danger"
+                                        *ngIf="paymentFormControl.city.touched && paymentFormControl.city.errors?.required">
+                                        field is required
+                                    </span>
+
+                                </div>
+
+                                <!-- state dropdown  -->
+                                <select
+                                    class="form-control form-control-lg ng-pristine ng-invalid ng-touched  form-outline mb-4"
+                                    formControlName="state"
+                                    [ngClass]="{'is-invalid':submitted && paymentFormControl['state'].errors }">
+
+                                    <option ng-reflect-value="">Select State</option>
+                                    <option class="ng-star-inserted">dnh</option>
+                                </select>
+                                <span class="text-danger"
+                                    *ngIf="paymentFormControl.state.touched && paymentFormControl.state.errors?.required">
+                                    field is required
+                                </span>
+
+                                <!-- city code -->
+                                <div class="form-outline mb-4">
+                                    <input type="text" placeholder="City code*" class="form-control form-control-lg"
+                                        formControlName="city_code"
+                                        [ngClass]="{'is-invalid':submitted && paymentFormControl['city_code'].errors }" />
+
+                                    <span class="text-danger"
+                                        *ngIf="paymentFormControl.city_code.touched && paymentFormControl.city_code.errors?.required">
+                                        field is required
+                                    </span>
+
+                                </div>
+
+
+                                <!-- email -->
+                                <div class="form-outline mb-4">
+                                    <input type="email" placeholder="email*" class="form-control form-control-lg"
+                                        formControlName="email"
+                                        [ngClass]="{'is-invalid':submitted && paymentFormControl['email'].errors }" />
+                                    <span class="text-danger"
+                                        *ngIf="paymentFormControl.email.touched && paymentFormControl.email.errors?.required">
+                                        field is required
+                                    </span>
+                                    <span class="text-danger"
+                                        *ngIf="paymentFormControl.email.touched && paymentFormControl.email.errors?.email">
+                                        plz write valid email
+                                    </span>
+
+
+
+                                </div>
+
+
+                                <!-- phone number -->
+                                <div class="form-outline mb-4">
+                                    <input type="text" placeholder="phone number*" class="form-control form-control-lg"
+                                        formControlName="phone_number"
+                                        [ngClass]="{'is-invalid':submitted && paymentFormControl['phone_number'].errors }" />
+                                    <span class="text-danger"
+                                        *ngIf="paymentFormControl.phone_number.touched && paymentFormControl.phone_number.errors?.required">
+                                        This field is required
+                                    </span>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div style="margin-bottom: 25px;" classks="checkout-lastsection mt-4 align-items-center ">
+                                <span class="submit-btn">
+                                    <a>
+                                        <button style="background-color: rgb(187, 167, 241);"
+                                            class="mat-focus-indicator w-100 mat-stroked-button mat-button-base"
+                                            (click)="place_order()"> 
+                                            <span class="mat-button-wrapper">
+                                                place your order</span><span matripple=""
+                                                class="mat-ripple mat-button-ripple" ng-reflect-disabled="false"
+                                                ng-reflect-centered="false">
+
+                                            </span><span class="mat-button-focus-overlay"></span></button></a></span>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                        </form>
+
+
+
+
+
+
+
+                    </div>
+                  
+                    <div class="col-md-8 col-lg-7 col-xl-6 d-flex">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2> Cart</h2>
+                                <h2> {{uuid}}</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered m-0">
+                                        <thead>
+                                            <tr>
+                                                <!-- Set columns width -->
+                                                <th class="text-center py-3 px-2" style="min-width: 331px;">
+                                                    Product details </th>
+            
+                                            </tr>
+                                        </thead>
+            
+                                        <tbody>
+                                            <tr *ngFor="let pro of productlist;">
+                                                <td class="p-4">
+                                                    <div class="media align-items-center">
+                                                        <!-- img -->
+                                                        <img style="height:35px;" src="{{imageDirectorypath}}{{pro.image_url}}"
+                                                            class="d-block ui-w-40 ui-bordered mr-4" alt="">
+            
+                                                        <!-- product name -->
+                                                        <a href="#" class="d-block text-dark">{{pro.id}}{{pro.title}}</a>
+                                                    </div>
+                                                </td>
+            
+                                                <td class="text-right font-weight-semibold align-middle p-4">{{pro.price}}
+            
+                                                </td>
+                                                <td class="align-middle p-4"><input type="text" class="form-control text-center"
+                                                        value="{{pro.qty}}">
+                                                </td>
+                                                <td class="text-right font-weight-semibold align-middle p-4">{{pro.qty
+                                                    *pro.price | currency:'₹'}}
+            
+                                                </td>
+                                                <!-- <td class="text-center align-middle px-0"><a href="#"
+                                                        class="shop-tooltip close float-none text-danger" title=""
+                                                        data-original-title="Remove">×</a>
+                                                </td> -->
+            
+                                            </tr>
+                                        </tbody>
+            
+            
+            
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+            
+            
+            
+            
+            
+            
+            
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+</section>

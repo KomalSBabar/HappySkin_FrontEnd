@@ -1,0 +1,466 @@
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ApiService } from '../api.service';
+import { AuthService } from '../auth.service';
+import { environment } from 'src/environments/environment';
+import { isEmpty } from 'rxjs';
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'MM/YYYY',
+  },
+  display: {
+    dateInput: 'MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+  
+  },
+};
+// declare var Stripe: any;
+const Stripe = require('stripe')
+@Component({
+  selector: 'app-payment',
+  templateUrl: './payment.component.html',
+  styleUrls: ['./payment.component.css'],
+  encapsulation: ViewEncapsulation.None,
+})
+export class PaymentComponent implements OnInit {
+  productlist: any = [] ;
+  total :number =0 ;
+  uuid :any;
+  a:any;
+  cid:any;
+  div_id:any;
+  Price_non_pre_product: number = 0;
+  Price:number = 0;
+  show_billing_block:boolean = false;
+  shippingcartFormControl:any
+  paymentformgroup:any;
+  cdid:any;
+  loggedIn: boolean = false;
+  stripeKey = environment.publishableKeyStripe
+  stripe: any;
+  cartId: any;
+  minAmountShipping: any;
+  shipping: any = 0;
+  taxes: any;
+  response1: any;
+  response2: any;
+  discount: any;
+  user_id = localStorage.getItem('user_id');
+  addressResponse: any;
+  billingaddressForm: any;
+  case_id: any;
+  set_cartid: any;
+  cardElement: any;
+  bsCurDate:any = new Date()
+  submitted = false;
+  imageDirectorypath:any = "http://localhost/my-pro/public/image/";
+  user: any;
+  constructor(private apiService: ApiService, private authService: AuthService,private router: Router) { }
+ 
+  ngOnInit(): void {
+
+    console.log('STRIPE JKEY',this.stripeKey)
+
+    this.stripe = Stripe(this.stripeKey);
+    console.log('stripe', this.stripe);
+    var elements = this.stripe.elements();
+    this.cardElement = elements.create('cardNumber', {});
+    console.log('cardElement', this.cardElement);
+    
+    this.cardElement.mount('#card_number');
+
+    var exp = elements.create('cardExpiry', {});
+    exp.mount('#card_expiry');
+
+    var cvc = elements.create('cardCvc', {});
+    cvc.mount('#card_cvc');
+
+
+
+
+
+    this.paymentformgroup = new FormGroup({
+      // cardnumber:new FormControl('', [Validators.required,Validators.maxLength(16)]),
+      cardname:new FormControl('', [Validators.required]),
+      // expirydate :new FormControl('', [Validators.required]),
+      // cvccode:new FormControl('', [Validators.required,Validators.maxLength(3)]),
+      shiping_add:new FormControl(),
+      first_name:new FormControl('',[Validators.required]),
+      last_name:new FormControl('',[Validators.required]),
+      addres:new FormControl('',[Validators.required]),
+      add_t:new FormControl('',[Validators.required]),
+      city:new FormControl('',[Validators.required]),
+      state:new FormControl('',[Validators.required]),
+      city_code:new FormControl('',[Validators.required,Validators.maxLength(3)]),
+      email:new FormControl('',[Validators.required,Validators.email]),
+      phone_number:new FormControl('',[Validators.required,Validators.pattern("^((\\+1-?)|0)?[0-9]{10}$")]),
+
+    })
+
+    if(localStorage.getItem('token') !== null)
+    {
+      this.loggedIn = true;
+    }
+    else
+    {
+      this.loggedIn = false
+    }
+
+
+
+    this.authService.user_id.subscribe(uid=>{
+      
+      console.log("check",uid);
+      this.uuid =  uid,
+     this.displayc(this.uuid);
+     this.getCartId(this.uuid);
+    //  this.getCardId();
+    
+    })
+  }
+
+get paymentFormControl(){
+   return this.paymentformgroup.controls
+}
+
+
+  displayc(argguments : any){
+    let payload ={
+      
+      "u_id":this.uuid
+   
+    }
+    this.apiService.displaycart(payload).subscribe(res=>{
+      console.log(res)
+      
+      this.productlist =res.data
+      console.log("89",this.productlist)
+  this.productlist.forEach((data:any)=>{
+  
+  this.total = this.total + data.total; 
+  })
+    
+  
+  })
+  }
+
+  getCartId(argguments:any){
+    this.a = this.uuid;
+  
+  let payload={
+    u_id :this.uuid
+  }
+  this.apiService.cartid(payload).subscribe((res:any)=>{
+    this.cid = res.data
+  })
+
+  }
+  // getCardId(){
+  //   this.apiService.cardid().subscribe((res:any)=>{
+  //     this.cdid = res.data
+  //   })
+    
+  // }
+
+// function at radio button
+AddBillingAddress_show(event:any){
+  if( event.target.checked == true){
+    this.show_billing_block = true;
+  }else if( event.target.checked == false){
+    this.show_billing_block = false;
+  }
+  
+}
+
+AddBillingAddress_hide(event:any){
+  if( event.target.checked == true){
+    this.show_billing_block = false;
+  }
+}
+
+
+  // place_order(){
+
+  //   this.submitted = true
+  //   if (this.paymentformgroup.invalid) {
+     
+  //     return
+  //   }
+
+  //   console.log('exdate',this.paymentformgroup.value.expirydate)
+  //   this.paymentformgroup.value.expirydate =  ('0' + (this.paymentformgroup.value.expirydate.getMonth()+1)) +'-'+ this.paymentformgroup.value.expirydate.getFullYear()
+  //  let payload ={
+  //   "u_id":this.uuid,
+  //   "c_id":this.cid,
+  //   "card_id":this.cdid,
+  //   "order_status":"done",
+   
+  //   "payment_status":"done",
+
+  //   "card_number":this.paymentformgroup.value.cardnumber,
+  //   "card_name":this.paymentformgroup.value.cardname,
+  //   "expiry_date":this.paymentformgroup.value.expirydate,
+  //   "cvc_code":this.paymentformgroup.value.cvccode,
+  //  "ship_add_id":this.paymentformgroup.value.shiping_add
+  //  }
+    
+  //  console.log("order",payload);
+  //  this.apiService.placeorder(payload).subscribe(res=>{
+  //   console.log(res)
+  //   this.router.navigate(['/ordercomplete', this.a]);
+
+  //  })
+
+
+  // }
+
+
+
+  async place_order(){
+
+    this.submitted = true
+  
+    // different billing address
+    if(this.paymentformgroup.value.shiping_add == "different_billing_address") 
+    {
+    
+      if(this.paymentformgroup.valid){
+console.log('shipp insdied valid')
+        let s_token = await this.createToken();
+        console.log('toki',s_token) 
+        if(s_token !== isEmpty){
+
+          console.log('inside toki')
+          // addres store karega 
+          let payload1 = {
+            "user_id": localStorage.getItem('user_id'),
+            "patient_firstname": this.paymentformgroup.value.first_name,
+            "patient_lastname": this.paymentformgroup.value.last_name,
+            "addressline1": this.paymentformgroup.value.address,
+            "addressline2": this.paymentformgroup.value.add_t,
+            "city": this.paymentformgroup.value.city,
+            "state": this.paymentformgroup.value.state,
+            "zipcode": this.paymentformgroup.value.city_code,
+            "email": this.paymentformgroup.value.email,
+            "phone": this.paymentformgroup.value.phone_number,
+            "address_type": "2",
+            "token":localStorage.getItem('token'),
+
+          }
+          console.log('payloaa',payload1)
+          console.log('uid',payload1.user_id)
+          console.log('uid',payload1.token)
+          this.apiService.addAddress(payload1).subscribe(res =>{
+console.log( 'add api',   res)
+          });
+
+          this.apiService.getUserById(this.user_id).subscribe(res =>{
+            console.log( 'uidb',   res)
+                      });
+  this.cartId=localStorage.getItem('cartid');
+
+                    
+console.log(this.taxes,'tax value');
+          let payload ={
+
+            "user_id": localStorage.getItem('user_id'),
+            "cart_id": this.cartId,
+            
+            "cart_amount": this.total,
+            "total_amount": 33,
+            "patient_firstname": this.paymentformgroup.value.first_name,
+            "patient_lastname": this.paymentformgroup.value.last_name,
+            "email": this.paymentformgroup.value.email,
+            "shipping_method": "2",
+            "shipping_addreess_id": 2,
+            "billing_address_id":"",
+            "card_number": 0,
+            "card_name": this.paymentformgroup.value.cardname,
+
+            "pharmacy_detail": "asfsaasf",
+            "medication_type": 2,
+            "case_id": 0,
+            // "shipping_fee": this.shipping,
+            "shipping_fee": 5,
+            "tax":0,
+            "gift_code_discount": 0,
+             
+            "payment_status": 'pending',
+
+
+            // payment kai liye
+            "order_id": "-",
+            "name": this.user.first_name + ' ' + this.user.last_name,
+            "amount": 33,
+            "stripeToken": s_token,
+            "telemedicine_fee": 0,
+            "reference_note": "Non-Prescribe Product",
+            // "handling_fee": this.shipping,
+            "handling_fee":5,
+            'ordertype': 'Non-prescribe'
+          }
+          
+
+
+          console.log('payload - yeah wala',payload)
+          this.apiService.addPayment(payload).subscribe(res =>{
+            console.log('check pay', res);
+           
+              this.apiService.getCartItemOfUser(localStorage.getItem('user_id')).subscribe(res => {
+                console.log('getCartItemOfUser', res);
+                for (var data of res.data) {
+                  console.log(data);
+                  let adata = {
+                    status: "purchased",
+                    user_id: this.user_id,
+                    order_type: 'Non-Prescribe',
+                    product_price: data.product_price,
+                    quantity: data.product_quantity,
+                    product_id: data.product_id,
+                  }
+                  console.log('data.id1', data.id);
+                  this.apiService.updateCartItemOfUser(data.id, adata).subscribe((res:any) => {
+                    //localStorage.setItem('order', 'true')
+                      console.log('update_cart', res);
+
+                  });
+                }
+              })
+            
+            this.router.navigate(['/ordercomplete/', res]);
+          });
+          
+        }else{
+         
+          if (!s_token) {
+            // this.notifyService.showError('Card details is required', ' ', 3000);
+            this.router.navigate(['/nonprescribed-paymentfailed']);
+            return;
+          }
+          return;
+        }
+      }
+
+
+
+
+    }
+
+      //same shipping address
+    else   {
+
+      console.log('kuch nhi',this.paymentformgroup.value.shiping_add)
+          let token = await this.createToken();
+          console.log('tokennnnn',token);
+
+          if(token){
+
+            let payload = {
+              "user_id": localStorage.getItem('user_id'),
+              "cart_id": this.cartId,
+              "cart_amount": this.Price,
+              "total_amount": this.Price,
+
+            }
+
+          }
+
+    }
+
+
+
+
+
+  //   console.log('exdate',this.paymentformgroup.value.expirydate)
+  //   this.paymentformgroup.value.expirydate =  ('0' + (this.paymentformgroup.value.expirydate.getMonth()+1)) +'-'+ this.paymentformgroup.value.expirydate.getFullYear()
+  //  let payload ={
+  //   "u_id":this.uuid,
+  //   "c_id":this.cid,
+  //   "card_id":this.cdid,
+  //   "order_status":"done",
+   
+  //   "payment_status":"done",
+
+  //   "card_number":this.paymentformgroup.value.cardnumber,
+  //   "card_name":this.paymentformgroup.value.cardname,
+  //   "expiry_date":this.paymentformgroup.value.expirydate,
+  //   "cvc_code":this.paymentformgroup.value.cvccode,
+  //  "ship_add_id":this.paymentformgroup.value.shiping_add
+
+
+
+  //  }
+    
+  //  console.log("order",payload);
+  //  this.apiService.placeorder(payload).subscribe(res=>{
+  //   console.log(res)
+  //   this.router.navigate(['/ordercomplete', this.a]);
+
+  //  })
+
+
+  }
+  
+  createToken() {
+    console.log('card element ',this.cardElement)
+   
+    return new Promise((resolve) => {
+      console.log('stripe_token 1',resolve)
+      // console.log('card element andar ',this.paymentformgroup.value.cardnumber)
+ console.log('card element andar ',this.cardElement)
+      // this.stripe.createToken(this.paymentformgroup.value.cardnumber).then(function (result:any) {
+         this.stripe.createToken(this.cardElement).then(function (result:any) {
+        console.log('stripe_token 2' ,result)
+        if (result.error) {
+          // Inform the user if there was an error
+          resolve(0)
+        } else {
+          // Send the token to your server
+          resolve(result.token.id)
+        }
+      }, (error: any) => {
+        resolve(0);
+      })
+    })
+  }
+
+
+  getCheckoutAddress() {
+    console.log('mm')
+    let data = {
+      user_id: localStorage.getItem('user_id')
+    }
+    let userEmail: any;
+    this.apiService.getUserById(localStorage.getItem('user_id')).subscribe((res:any) => {
+      this.user = res.data;
+      userEmail = res.data.email;
+    });
+    this.apiService.getCheckoutAddress(data).subscribe((res:any) => {
+      console.log('test----', res);
+      this.addressResponse = res.data;
+      this.set_cartid= localStorage.setItem('cartid',this.addressResponse.cart_id)
+
+      console.log('after', this.addressResponse);
+      console.log('after', this.addressResponse);
+      this.billingaddressForm.patchValue({
+        firstName: res.data.patient_firstname,
+        lastName: res.data.patient_lastname,
+        emailAddress: !res.data.email ? userEmail : res.data.email,
+        phoneNumber: res.data.phone
+      })
+    });
+  }
+
+  onOpenCalendar(container:any) {
+    container.monthSelectHandler = (event: any): void => {
+      container._store.dispatch(container._actions.select(event.date));
+    };
+    container.setViewMode('month');
+  }
+
+  back_to_shiping(){
+    this.router.navigate(['/checkout']);
+  }
+}

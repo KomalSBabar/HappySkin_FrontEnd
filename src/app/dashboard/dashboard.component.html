@@ -1,0 +1,20 @@
+<p>dashboard works!</p>
+<p>adminpanel works!</p>
+  <div class="row">
+    <div class="col" *ngFor="let pro of productlist; let myindex =index">
+      <div class="col-md-4 col-sm-6">
+        <div class="container_card_block">
+          <div class="card" style="width: 18rem;">
+            <div class="card-img-top">
+              <img class="card-img-top" src="{{imageDirectorypath}}{{pro.image_url}}" alt="Card image cap">
+              <div class="card-body">
+                <!-- <img src="{{imageDirectorypath}}{{pro.image_url}} "   > -->
+                <h3 class="card-title">{{pro.title}}</h3>
+                <h3 class="card-text">{{pro.price}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

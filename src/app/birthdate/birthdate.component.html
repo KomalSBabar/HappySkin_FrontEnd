@@ -1,0 +1,79 @@
+<div class="container" >
+    <div class="row row-zippage">
+
+        <section class="maincode-page zipcode fullpage bg-third ">
+            <div class="container-fluid p-0">
+                <!-- <div class="ouert-section"> -->
+                <div class="row">
+                    <div class="col-lg-6 col-xl-5 col-md-12">
+                        <div class="image-block ">
+                            <!--<img class="img-fluid" src="assets/images/origin-img.jpg" alt="imgblock">-->
+                            <img class="img-fluid" src="assets/images/girl2.PNG" alt="imgblock">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-7 col-md-12">
+                        <div class="right-side" style="padding-left: 75px;    padding-right: 276px;">
+
+
+                            <div class="block-part1">
+                                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                                <a id="back1" class="back_word" (click)="back()">Back</a>
+                            </div>
+
+                            <div class="block-part2">
+
+                                <h5 style="color: black; font-weight: bold;">Next, please enter your date of birth</h5>
+
+                            </div>
+                            <div class="block-part2">
+                                <p class="m-0 content-text">We’ll need to know your real age, so be honest here.
+
+                                </p>
+                            </div>
+                            <div class="block-part2">
+                                <p class="m-0 p-1 content-text">Patients Date of Birth
+
+                                </p>
+                            </div>
+                            <form [formGroup]="birthdateFormgroup" id="form1">
+                                <div class="block-part2">
+
+
+                                    <input type="date" class="form-control" id="dateOfBirth"
+                                        formControlName="dateOfBirth" min="{{minDobString}}" max="{{maxDobString}}"
+                                        required />
+                                    <span class="text-danger"
+                                        *ngIf="birthdateFormControls.dateOfBirth.touched && birthdateFormControls.dateOfBirth.errors?.required">
+                                        field is required
+                                    </span>
+                                    <!-- <span class="text-danger"
+                                        *ngIf="birthdateFormControls.dateOfBirth.touched && birthdateFormControls.dateOfBirth.errors?.minDobString">
+                                        minimu 13
+                                    </span> -->
+
+
+                                </div>
+                                <div class="block-part2">
+                                    <div class="block3">
+                                        <button class=" formsubmit_come" (click)="valid_check()"
+                                            (click)="reg()">Continue</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <form id="form2" style="display:none">
+                                <div class="block-part1">
+                                    <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                                    <a id="back1" class="back_word" (click)="back()">Back</a>
+                                </div>
+                                form2
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+            </div>
+        </section>
+    </div>
+</div>

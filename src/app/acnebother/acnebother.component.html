@@ -1,0 +1,163 @@
+
+<div class="container" style="align-items: center;padding-left: 373px;padding-right: 600px; height:100vh  ">
+
+    <!-- treated by depression -->
+<div class="bring" id="div1" style="display: block;" >
+    <form [formGroup]="formgroup1" id="form1" style="display: block;">
+        <div class="block-part1">
+            <img style="margin:18px;" src="assets/images/Iconleft.png" alt="" (click)="acccnebother_back_accutaneeval()"   >
+            <a id="back1" class="back_word" (click)="acccnebother_back_accutaneeval()">Back</a>
+        </div>
+        <div class="block-part2">
+            <h5 style="color: black; font-weight: bold;">Have you ever been treated for depression?</h5>
+            
+        </div>
+        <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="depression">
+            <mat-radio-button value="yes">
+                <span> yes </span>
+            </mat-radio-button>
+            <mat-radio-button value="no">
+                <span> no </span>
+            </mat-radio-button>
+
+
+        </mat-radio-group>
+        <span class="text-danger" *ngIf="error">
+            field is required
+        </span>
+        <div class="block-part2">
+            <div class="block3">
+                <button class=" formsubmit_come  m-4" (click)="continue1()">Continue</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- family depression -->
+<div class="bring" id="div2" style="display: none;" >
+    <form [formGroup]="formgroup2" id="form2" style="display: block;">
+        <div class="block-part1">
+            <img style="margin:18px;" src="assets/images/Iconleft.png" alt="" (click)="div2_back_div1()"   >
+            <a id="back1" class="back_word" (click)="div2_back_div1()">Back</a>
+        </div>
+        <div class="block-part2">
+            <h5 style="color: black; font-weight: bold;">Does anyone in your family have a history of depression?</h5>
+            
+        </div>
+        <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="fam_depression">
+            <mat-radio-button value="yes">
+                <span> yes </span>
+            </mat-radio-button>
+            <mat-radio-button value="no">
+                <span> no </span>
+            </mat-radio-button>
+
+
+        </mat-radio-group>
+        <span class="text-danger" *ngIf="error">
+            field is required
+        </span>
+        <div class="block-part2">
+            <div class="block3">
+                <button class=" formsubmit_come  m-4" (click)="continue2()">Continue</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<!-- health history issue -->
+<div class="bring" id="div3" style="display: none;" >
+    <form [formGroup]="formgroup3" id="form3" style="display: block;">
+        <div class="block-part1">
+            <img style="margin:18px;" src="assets/images/Iconleft.png" alt="" (click)="div3_back_div2()"   >
+            <a id="back1" class="back_word" (click)="div3_back_div2()">Back</a>
+        </div>
+        <div class="block-part2">
+            <h5 style="color: black; font-weight: bold;">Have you had any history of liver or cholesterol issues?</h5>
+            
+        </div>
+        <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="history_health_issue">
+            <mat-radio-button value="yes">
+                <span> yes </span>
+            </mat-radio-button>
+            <mat-radio-button value="no">
+                <span> no </span>
+            </mat-radio-button>
+
+
+        </mat-radio-group>
+        <span class="text-danger" *ngIf="error">
+            field is required
+        </span>
+        <div class="block-part2">
+            <div class="block3">
+                <button class=" formsubmit_come  m-4" (click)="continue3()">Continue</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<!-- weight -->
+<div class="bring" id="div4" style="display: none;" >
+    <form [formGroup]="formgroup4" id="form3" style="display: block;">
+        <div class="block-part1">
+            <img style="margin:18px;" src="assets/images/Iconleft.png" alt="" (click)="div4_back_div3()"   >
+            <a id="back1" class="back_word" (click)="div4_back_div3()">Back</a>
+        </div>
+        <div class="block-part2">
+            <h5 style="color: black; font-weight: bold;">What is your weight in lbs?</h5>
+            
+        </div>
+      
+       <input type="text" formControlName="weight" maxlength="3">
+        <span class="text-danger" *ngIf="error">
+            field is required
+        </span><br>
+        <span class="text-danger" *ngIf="error_len">
+            Weight is not more than 500 lbs
+        </span>
+        <div class="block-part2">
+            <div class="block3">
+                <button class=" formsubmit_come  m-4" (click)="continue4()">Continue</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<!-- height -->
+<div class="bring" id="div5" style="display: none;" >
+    <form [formGroup]="formgroup5" id="form3" style="display: block;">
+        <div class="block-part1">
+            <img style="margin:18px;" src="assets/images/Iconleft.png" alt="" (click)="div5_back_div4()"   >
+            <a id="back1" class="back_word" (click)="div5_back_div4()">Back</a>
+        </div>
+        <div class="block-part2">
+            <h5 style="color: black; font-weight: bold;">What is your Height?</h5>
+            
+        </div>
+      
+        <div style="display:flex; width:5opx; justify-content: space-evenly;">
+            <input style="width:71px;" type="text"  formControlName="height1" maxlength="2">
+            <input   style="width:71px;" type="text" formControlName="height2" maxlength="2">
+        </div>
+
+
+       
+        <span class="text-danger" *ngIf="error">
+            field is required
+        </span><br>
+       
+        <div class="block-part2">
+            <div class="block3">
+                <button class=" formsubmit_come  m-4" (click)="continue5()">Continue</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+</div>

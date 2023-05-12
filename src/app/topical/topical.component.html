@@ -1,0 +1,37 @@
+<div class="container" style="align-items: center;padding-left: 373px;padding-right: 600px;  ">
+    <div class="bring" id="div12" >
+        <form [formGroup]="questionFormgroup1" id="form12" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                <a id="back1" class="back_word" (click)="topical_back_skincare_page()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">Would you like to include Tretinoin in your formula?</h5>
+                <p>Tretinoin is a topical form of Vitamin A that increases turnover of your skin, releasing clogged
+                    pores and trapped bacteria that may be causing acne. Tretinoin is a powerhouse acne-fighting
+                    ingredient, and we only recommend not adding it if you haven’t tolerated Tretinoin well in the past.
+                </p>
+            </div>
+            <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="Tretinoin">
+                <mat-radio-button value="yes">
+                    <span> yes </span>
+                </mat-radio-button>
+                <mat-radio-button value="no">
+                    <span> no </span>
+                </mat-radio-button>
+            </mat-radio-group>
+
+            <div class="block-part2">
+            <span class="text-danger" *ngIf="error">
+                field is required
+            </span>
+        </div>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come  m-4" (click)="continue1()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

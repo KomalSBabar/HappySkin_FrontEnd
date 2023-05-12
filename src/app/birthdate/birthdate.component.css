@@ -1,0 +1,16 @@
+.block-part2 {
+    padding-inline-start: 46px;
+    padding-top: 5px;
+}
+.block3{
+    padding-top: 20px;
+    /* padding-left: 65px */
+}
+.formsubmit_come{
+    background-color: rgb(132, 208, 238);
+    border-radius: 25px;
+    height: 35px;
+    width: 194px;
+    border-color: aliceblue;
+    /* padding-top: 45px; */
+}

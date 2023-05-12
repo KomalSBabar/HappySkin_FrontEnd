@@ -1,0 +1,1140 @@
+<div class="container" style="align-items: center;padding-left: 373px;padding-right: 600px;  height:100vh ">
+    <!-- <div class="col-lg-6 col-xl-7 col-md-12"> -->
+    <!-- First, we need to know your legal name -->
+    <div class="gayab" id="div1" style="display: block;">
+        <form [formGroup]="questionFormgroup" id="form1" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" (click)="back()" alt="">
+                <a id="back1" class="back_word" (click)="back()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">OK,Lets get started</h5>
+
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black;">
+                    <div class="block-part2">
+                        <h5 style="color: black; font-weight:bolder">First, we need to know your legal name.</h5>
+                        <p class="m">These are actual prescription medications, so we need to know your real
+                            information.
+                        </p>
+
+                        <p class="m" style="color: black; font-weight:bolder"> No nicknames please!</p>
+                    </div>
+
+                </h5>
+            </div>
+
+            <div class="mt32">
+                <div class="formgroup">
+
+
+                    <input type="text" class="form-control m-4" formControlName="fname"
+                        placeholder="Patient's legal first name"
+                        [ngClass]="{'is-invalid':submitted && qFormControls['fname'].errors }" />
+
+                    <span class="text-danger"
+                        *ngIf="qFormControls.fname.touched && qFormControls.fname.errors?.required">
+                        field is required
+                    </span>
+                    <input type="text" class="form-control m-4 " formControlName="lname"
+                        placeholder="Patient's legal last name"
+                        [ngClass]="{'is-invalid':submitted && qFormControls['lname'].errors }" />
+                    <span class="text-danger"
+                        *ngIf="qFormControls.lname.touched && qFormControls.lname.errors?.required">
+                        field is required
+                    </span>
+
+                    <input type="text" formControlName="phone_no" placeholder="Patient's phoneNumber"
+                        class="form-control m-4 "
+                        [ngClass]="{'is-invalid':submitted && qFormControls['phone_no'].errors}">
+                    <span class="text-danger"
+                        *ngIf="qFormControls.phone_no.touched && qFormControls.phone_no.errors?.required">
+                        field is required
+                    </span>
+                    <span class="text-danger"
+                        *ngIf="qFormControls.phone_no.touched && qFormControls.phone_no.errors?.minlength">
+                        must be 10 digit
+                    </span>
+                    <span class="text-danger"
+                        *ngIf="qFormControls.phone_no.touched && qFormControls.phone_no.errors?.pattern">
+                        must be in digit
+                    </span>
+                </div>
+                <div class="block-part2">
+                    <div class="block3">
+                        <button class=" formsubmit_come   m-4" (click)="continue()">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- What gender do you identify as -->
+    <div class="bring" id="div2" style="display:none;">
+        <form [formGroup]="questionFormgroup2" id="form2" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" (click)="back2()" alt="">
+                <a id="back1" class="back_word" (click)="back2()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">What gender do you identify as?</h5>
+            </div>
+            <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="gender_option">
+                <mat-radio-button value="Cisgender male(born and identify as a male)">Cisgender male(born and identify
+                    as a male)</mat-radio-button>
+                <mat-radio-button value="Cisgender female(born and identify as a female)">Cisgender female(born and
+                    identify as a female)</mat-radio-button>
+                <mat-radio-button value="Transgender">Transgender</mat-radio-button>
+                <mat-radio-button value="Gender Non-Binary">Gender Non-Binary</mat-radio-button>
+                <mat-radio-button value="Other">Other</mat-radio-button>
+            </mat-radio-group>
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come   m-4" (click)="continue2()">Continue</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- What was your gender assigned at birth?       -->
+    <div class="bring" id="div3" style="display:none;">
+        <form [formGroup]="questionFormgroup3" id="form3" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" (click)="back3()" alt="">
+                <a id="back1" class="back_word" (click)="back3()">Back</a>
+            </div>
+
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">What was your gender assigned at birth?</h5>
+                <p style="min-width: 500px;">Hormones can play a major role in skincare, and some treatments (like
+                    Accutane) involve different
+                    procedures depending on whether or not you’re able to get pregnant.</p>
+            </div>
+            <div>
+                <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="gen_birth">
+                    <mat-radio-button value="Male">Male</mat-radio-button>
+                    <mat-radio-button value="Female">Female</mat-radio-button>
+
+                </mat-radio-group>
+                <span class="text-danger" *ngIf="gender_error">
+                    field is required
+                </span>
+            </div>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come   m-4" (click)="continue_gen()">Continue</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- commen screen hian male and female -->
+    <!-- commen screen -->
+    <div class="bring" id="div4" style="display:none;">
+        <form [formGroup]="questionFormgroup" id="form4" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="" (click)="back4()">
+                <a id="back1" class="back_word" (click)="back4()">Back</a>
+            </div>
+
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">Let’s learn a bit about your skin</h5>
+                <p style="min-width: 500px;">Let's keep it . Getting clear, healthy skin isn't about just one thing or
+                    what you put on your face-it's about how prescriptions, diet, lifestyle and regimens all play
+                    together.</p>
+            </div>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come   m-4" (click)="common_tobreakingout()">Continue</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- female -->
+    <div class="bring" id="div5" style="display:none;">
+
+        <form [formGroup]="questionFormgroup4" id="form5" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" (click)="back5()" alt="">
+                <a id="back1" class="back_word" (click)="back5()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">Do any of the following apply to you?</h5>
+                <p>Please note in the case that one of these apply, we may request additional medical documentation
+                    during treatment.</p>
+            </div>
+            <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="female_radio_option">
+                <mat-radio-button value="Have_had_a_hysterectomy">Have had a hysterectomy</mat-radio-button>
+                <mat-radio-button value="Have_had_a_bi-lateral_oophorectomy">Have had a bi-lateral
+                    oophorectomy</mat-radio-button>
+                <mat-radio-button value="Are_post_Meno-pausal">Are post Meno-pausal</mat-radio-button>
+                <mat-radio-button value="None_of_these_apply_to_me">None of these apply to me</mat-radio-button>
+
+            </mat-radio-group>
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come   m-4" (click)="continue5()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- what are you breaking out -->
+
+    <div class="bring" id="div6" style="display:none;">
+
+        <form [formGroup]="questionFormgroup6" id="form6" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="" (click)="breakingpoint_common_back()">
+                <a id="back1" class="back_word" (click)="breakingpoint_common_back()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">what are you breaking out?</h5>
+                <p>Feel free to select more than one.</p>
+            </div>
+
+            <p><mat-checkbox formControlName="Face">Face</mat-checkbox></p>
+            <p><mat-checkbox formControlName="Neck"> Neck</mat-checkbox></p>
+            <p><mat-checkbox formControlName="Scholders_Chest_Back">Scholders_Chest_Back</mat-checkbox></p>
+
+
+
+
+
+
+
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come   m-4" (click)="continue6()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- skin type sensitive.. -->
+
+    <div class="bring" id="div7" style="display:none;">
+
+        <form [formGroup]="questionFormgroup7" id="form7" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt=""
+                    (click)="skin_type_back_breakingout()">
+                <a id="back1" class="back_word" (click)="skin_type_back_breakingout()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">How would you classify your skin sensitivity?</h5>
+                <p>This will give your dermatologist a good baseline to determine your plan, as treatment plans can vary
+                    depending on your skin’s tendencies. Sensitivity here means how sensitive your skin is when reacting
+                    to new products or treatments and tends to be correlated with your skin dryness.</p>
+            </div>
+            <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="skin_option">
+                <mat-radio-button value="very_sensitive">Very Sensitive</mat-radio-button>
+                <mat-radio-button value="Sensitive">Sensitive</mat-radio-button>
+                <mat-radio-button value="Normal">Normal</mat-radio-button>
+                <mat-radio-button value="Not_Sensitive">Not Sensitive</mat-radio-button>
+                <mat-radio-button value="Not_Sensitive_at_all">Not Sensitive at all</mat-radio-button>
+            </mat-radio-group>
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come   m-4" (click)="continue7()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- what ethincity do you identify most with -->
+
+    <div class="bring" id="div8" style="display:none;">
+
+        <form [formGroup]="questionFormgroup8" id="form8" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="" (click)="ethincity_back_skintype()">
+                <a id="back1" class="back_word" (click)="ethincity_back_skintype()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">What ethnicity (ethnicities) do you identify most with?
+                </h5>
+                <p>Feel free to select more than one.</p>
+            </div>
+            <mat-checkbox formControlName="White">White/Caucasian</mat-checkbox>
+            <mat-checkbox formControlName="Hispanic"> Hispanic</mat-checkbox>
+            <mat-checkbox formControlName="Black">Black or African American</mat-checkbox>
+            <mat-checkbox formControlName="East_Asian">East Asian</mat-checkbox>
+            <mat-checkbox formControlName="South_Asian">South Asian</mat-checkbox>
+            <mat-checkbox formControlName="Middle_Eastern">Middle Eastern</mat-checkbox>
+            <mat-checkbox formControlName="Native_American">Native American</mat-checkbox>
+            <mat-checkbox formControlName="Pacific_Islander">Pacific Islander</mat-checkbox>
+            <mat-checkbox formControlName="other">other</mat-checkbox>
+
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come  m-4" (click)="continue8()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- How would you classify the severity of your acne -->
+    <div class="bring" id="div9" style="display:none;">
+
+        <form [formGroup]="questionFormgroup9" id="form9" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                <a id="back1" class="back_word" (click)="acne_back_ethencity()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">How would you classify the severity of your acne?</h5>
+            </div>
+            <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="severity_acne">
+                <mat-radio-button value="Mild">
+                    <h5 style="color: black; font-weight: bold;">Mild</h5>
+                    <div class="field">
+                        <div style="width:10%">
+                            <img class="img-acne" src="assets/images/mild.png" alt="" style="height:40px;">
+                        </div>
+                        <div style="width:90%">
+                            <span> Just a few pimples here and there.Mostlt whiteheads and</span><br>
+                            <span> blackheads with a few inflamed bumps here and there.</span>
+                        </div>
+                    </div>
+                </mat-radio-button>
+
+                <mat-radio-button value="Moderate">
+                    <h5 style="color: black; font-weight: bold;">Moderate</h5>
+
+                    <div class="field">
+                        <div style="width:10%">
+                            <img class="img-acne" src="assets/images/moderate.png" alt="" style="height:40px;">
+                        </div>
+                        <div style="width:90%">
+                            <span>Multiple inflamed pimples with new ones popping</span><br>
+                            <span> up. Acne is inflamed and red.</span>
+                        </div>
+                    </div>
+                </mat-radio-button>
+
+                <mat-radio-button value="moderately_severe">
+                    <h5 style="color: black; font-weight: bold;">Moderately severe</h5>
+
+
+                    <div class="field">
+                        <div style="width:10%">
+                            <img class="img-acne" src="assets/images/moderately_severe.png" alt="" style="height:40px;">
+                        </div>
+                        <div style="width:90%">
+                            <span>a large number of inflamed pimples with </span><br>
+                            <span> some deeper,more painful nodules that do not come to a head.</span><br>
+                            <span>Acne leaves moderate scarring.</span>
+                        </div>
+                    </div>
+
+                </mat-radio-button>
+
+
+                <mat-radio-button value="severe">
+                    <h5 style="color: black; font-weight: bold;">severe</h5>
+                    <div class="field">
+                        <div style="width:10%">
+                            <img class="img-acne" src="assets/images/severe.png" alt="" style="height:40px;">
+                        </div>
+                        <div style="width:90%">
+                            <span>a large number of inflamed pimples with multiple deep,</span><br>
+                            <span> painful nodules that do not come to a head.Acne leaves</span><br>
+                            <span> significant scarring.</span>
+
+                        </div>
+                    </div>
+
+
+
+                </mat-radio-button>
+
+            </mat-radio-group>
+
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come  m-4" (click)="continue9()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!--severity of your acne se  acne part2 -->
+    <div class="bring" id="div10" style="display:none;">
+
+        <form [formGroup]="questionFormgroup10" id="form10" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="" (click)="acne2_back_acne()">
+                <a id="back1" class="back_word" (click)="acne2_back_acne()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">Does your acne tend to scar, and if so how would you
+                    classify it?</h5>
+            </div>
+            <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="acne_to_scar">
+                <mat-radio-button value="no_scar">
+                    <div class="field">
+                        <div style="width:10%">
+                            <img class="img-acne" src="assets/images/scar_1.png" alt=""
+                                style="height:40px;  width:315px">
+                        </div>
+                        <div style="width:90% ;padding-left: 10px;">
+                            <span> My acne does not scar </span><br>
+
+                        </div>
+                    </div>
+                </mat-radio-button>
+
+                <mat-radio-button value="dark_marks">
+
+                    <div class="field">
+                        <div style="width:10%">
+                            <img class="img-acne" src="assets/images/scar_2.png" alt=""
+                                style="height:40px; width:315px">
+                        </div>
+                        <div style="width:90% ;padding-left: 10px;">
+                            <span>I tend to get dark marks and </span><br>
+                            <span> Pigmentation from my acne</span>
+                        </div>
+                    </div>
+                </mat-radio-button>
+
+                <mat-radio-button value="bumps_after_acne_heals">
+
+                    <div class="field">
+                        <div style="width:10%">
+                            <img class="img-acne" src="assets/images/scar_3.png" alt=""
+                                style="height:40px;  width:315px">
+                        </div>
+                        <div style="width:90% ;padding-left: 10px;">
+                            <span>My skin does tend to scar </span><br>
+                            <span> and causes depressions and </span><br>
+                            <span>bumps after my acne heals.</span>
+                        </div>
+                    </div>
+
+                </mat-radio-button>
+
+            </mat-radio-group>
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come  m-4" (click)="continue10()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- how long you had acne -->
+    <div class="bring" id="div11" style="display:none;">
+
+        <form [formGroup]="questionFormgroup11" id="form11" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                <a id="back1" class="back_word" (click)="how_long_back_acne2()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">How long have you had your acne for?</h5>
+            </div>
+            <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="long_acne_had">
+                <mat-radio-button value="less_than_3m">
+                    <span>
+                        < 3 month </span>
+                </mat-radio-button>
+                <mat-radio-button value="3m_to_6m">
+                    <span> 3-6 month </span>
+                </mat-radio-button>
+                <mat-radio-button value="3m_to_1y">
+                    <span> 6 month - 1 year </span>
+                </mat-radio-button>
+                <mat-radio-button value="greater_than_1y">
+                    <span> > 1 year </span>
+                </mat-radio-button>
+
+            </mat-radio-group>
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come  m-4" (click)="continue11()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+
+
+    <!-- family acne  -->
+    <div class="bring" id="div12" style="display:none;">
+        <form [formGroup]="questionFormgroup12" id="form12" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                <a id="back1" class="back_word" (click)="family_acne_how_long_had()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">Does anyone in your immediate family have acne?</h5>
+                <p>Acne often runs in families and can be a good starting point to see what your acne may respond to.
+                </p>
+            </div>
+            <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="family_acne">
+                <mat-radio-button value="yes">
+                    <span> yes </span>
+                </mat-radio-button>
+                <mat-radio-button value="no">
+                    <span> no </span>
+                </mat-radio-button>
+
+
+            </mat-radio-group>
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come  m-4" (click)="continue12()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- acne bothers you -->
+
+    <div class="bring" id="div13" style="display:none;">
+        <form [formGroup]="questionFormgroup13" id="form13" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                <a id="back1" class="back_word" (click)=" acne_bothers_back_family_acne()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">How much does your acne bother you?</h5>
+
+            </div>
+            <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="acne_bother">
+
+                <mat-radio-button value="not_bother">
+                    <div class="field">
+                        <div style="width:80% ;padding-left: 10px;">
+                            <span>It doesn't really bother me </span><br>
+
+                        </div>
+                        <div style="width:15%">
+                            <img class="img-acne" src="assets/images/Picture1.png" alt=""
+                                style="height:65px;  width:315px">
+                        </div>
+                    </div>
+                </mat-radio-button>
+
+                <mat-radio-button value="do_notice">
+
+                    <div class="field">
+                        <div style="width:80% ;padding-left: 10px;">
+                            <span>I do notice that it’s there, but it doesn’t prevent</span><br>
+                            <span>me from doing day to day things</span><br>
+                        </div>
+                        <div style="width:15%">
+                            <img class="img-acne" src="assets/images/Picture2.png" alt=""
+                                style="height:65px;  width:315px">
+                        </div>
+                    </div>
+
+                </mat-radio-button>
+
+                <mat-radio-button value="bothers">
+                    <div class="field">
+                        <div style="width:80% ;padding-left: 10px;">
+                            <span>It bothers me and I do feel self-conscious </span><br>
+                            <span> about it sometimes when other people point</span><br>
+                            <span>it out</span>
+                        </div>
+                        <div style="width:15%">
+                            <img class="img-acne" src="assets/images/Picture3.png" alt=""
+                                style="height:65px;  width:315px">
+                        </div>
+                    </div>
+
+                </mat-radio-button>
+
+                <mat-radio-button value="bothers_alot">
+
+
+                    <div class="field">
+                        <div style="width:80% ;padding-left: 10px;">
+                            <span>It bothers me a lot I sometimes skip out </span><br>
+                            <span> on things because of my acne and it </span><br>
+                            <span>affects my self-esteem.</span>
+                        </div>
+                        <div style="width:15%">
+                            <img class="img-acne" src="assets/images/Picture4.png" alt=""
+                                style="height:65px;  width:315px">
+                        </div>
+                    </div>
+
+                </mat-radio-button>
+
+                <mat-radio-button value="acne_confidence">
+
+                    <div class="field">
+                        <div style="width:80% ;padding-left: 10px;">
+                            <span>My acne is the primary thing that holds </span><br>
+                            <span> back my confidence, and I feel like </span><br>
+                            <span> it holds me back from enjoying things</span><br>
+                            <span> as much as I want to.</span><br>
+
+                        </div>
+                        <div style="width:15%">
+                            <img class="img-acne" src="assets/images/Picture5.png" alt=""
+                                style="height:65px;  width:315px">
+                        </div>
+                    </div>
+                </mat-radio-button>
+
+
+
+
+
+
+
+
+            </mat-radio-group>
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come  m-4" (click)="continue13()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- current diet -->
+    <div class="bring" id="div14" style="display:none;">
+
+        <form [formGroup]="questionFormgroup14" id="form14" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                <a id="back1" class="back_word" (click)="currentdiet_back_acne_bothers()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">How would you best describe your current diet?</h5>
+            </div>
+            <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="current_diet">
+                <mat-radio-button value="veg">
+                    <div class="field">
+                        <div style="width:10%">
+                            <img class="img-acne" src="assets/images/food1.png" alt=""
+                                style="height:41px; width: 330px;">
+                        </div>
+                        <div style="width:90%">
+                            <span style="padding-left: 10px">Vegan/Vegetarian</span><br>
+
+                        </div>
+                    </div>
+
+                </mat-radio-button>
+                <mat-radio-button value="balanced_diet">
+                    <div class="field">
+                        <div style="width:10%">
+                            <img class="img-acne" src="assets/images/food2.png" alt=""
+                                style="height:41px; width: 330px;">
+                        </div>
+                        <div style="width:90%">
+                            <span style="padding-left: 10px">Relatively balanced diet</span><br>
+
+                        </div>
+                    </div>
+
+                </mat-radio-button>
+                <mat-radio-button value="heavy_food">
+                    <div class="field">
+                        <div style="width:10%">
+                            <img class="img-acne" src="assets/images/food3.png" alt=""
+                                style="height:41px; width: 330px;">
+                        </div>
+                        <div style="width:90%">
+                            <span style="padding-left: 10px">Heavy on processed foods</span><br>
+
+                        </div>
+                    </div>
+
+                </mat-radio-button>
+
+
+            </mat-radio-group>
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come  m-4" (click)="continue14()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- stress level -->
+    <div id="div15" style="display: none;">
+        <form [formGroup]="questionFormgroup15" id="form15" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                <a id="back1" class="back_word" (click)="stress_level_back_current_diet()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">How would you rate your stress level on a scale of 1 to 10?
+                </h5>
+            </div>
+            <!-- <div class="chart-scale">
+
+               
+
+                <button class="btn btn-scale btn-scale-asc-1"  value="1" (click)="range_1('1')">1</button>
+                <button class="btn btn-scale btn-scale-asc-2"  value="2" (click)="range_1('2')">2</button>
+                <button class="btn btn-scale btn-scale-asc-3" value="3"  (click)="range_1('3')">3</button>
+                <button class="btn btn-scale btn-scale-asc-4" value="4"  (click)="range_1('4')">4</button>
+                <button class="btn btn-scale btn-scale-asc-5" value="5"  (click)="range_1('5')">5</button>
+                <button class="btn btn-scale btn-scale-asc-6" value="6"  (click)="range_1('6')">6</button>
+                <button class="btn btn-scale btn-scale-asc-7" value="7"  (click)="range_1('7')">7</button>
+                <button class="btn btn-scale btn-scale-asc-8" value="8"  (click)="range_1('8')">8</button>
+                <button class="btn btn-scale btn-scale-asc-9" value="9"  (click)="range_1('9')">9</button>
+                <button class="btn btn-scale btn-scale-asc-10" value="10" (click)="range_1('10')">10</button>
+
+                <input type="text" formControlName="chart_scale" >
+
+                <hr />
+            </div> -->
+
+
+            <!-- 
+
+            <div *ngFor="let scale of scaleRate">
+                <label class="slider-checkbox">
+                    <input type="radio" value="{{scale}}"
+                        (change)="onCheck($event, scale, i)"
+                        [checked]="scale == ques.answer ? true : false" />
+                    <span>{{scale}}</span>
+                </label>
+              
+            </div> -->
+
+
+            <!-- <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                <p>Value: <span id="demo"></span></p>
+            </div> -->
+
+            <!-- <mat-slider min="0" max="100000" step="1000" showTickMarks discrete [displayWith]="formatLabel">
+                <input matSliderThumb>
+              </mat-slider> -->
+
+
+
+
+            <div>
+                <span>Grid Size (px): </span><b class="gridSizeValue">{{gridsize.value}}</b>
+            </div>
+            <mat-slider #gridsize (change)="updateSetting($event)" min="1" max="10" value="gridsize"
+                formControlName="chart_scale"></mat-slider>
+
+
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come  m-4" (click)="continue15()">Continue</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- few more medical questions -->
+    <div id="div16" style="display: none;">
+        <div class="block-part1">
+            <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+            <a id="back1" class="back_word" (click)="medical_ques_back_stress_level()">Back</a>
+        </div>
+        <div class="block-part2">
+            <h5 style="color: black; font-weight: bold;">Just a few questions about your medical history
+            </h5>
+            <p>On the following screens we'll ask a few quick questions about your medications, allergies, and overall
+                wellness.</p>
+        </div>
+        <div class="block-part2">
+            <div class="block3">
+                <button class=" formsubmit_come  m-4" (click)="continue16()">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- have you ever used topical subscription -->
+
+    <div id="div17" style="display: none;">
+        <form [formGroup]="questionFormgroup17" id="form17" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt=""
+                    (click)="used_topical_subs_back_medic_ques()">
+                <a id="back1" class="back_word" (click)="used_topical_subs_back_medic_ques()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">Have you ever used any topical prescriptions for your acne
+                    before?</h5>
+
+            </div>
+            <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="used_topical_subs">
+                <mat-radio-button value="yes">
+                    <span> yes </span>
+                </mat-radio-button>
+                <mat-radio-button value="no">
+                    <span> no </span>
+                </mat-radio-button>
+
+
+            </mat-radio-group>
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come  m-4" (click)="continue17()">Continue</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- had oral medication to allergic -->
+    <div id="div18" style="display: none;">
+        <form [formGroup]="questionFormgroup18" id="form18" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                <a id="back1" class="back_word" (click)="oral_medic_back_topical_subs()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">Have you ever used any oral medications for your acne
+                    before?</h5>
+            </div>
+            <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="oral_medication">
+                <mat-radio-button value="yes">
+                    <span> yes </span>
+                </mat-radio-button>
+                <mat-radio-button value="no">
+                    <span> no </span>
+                </mat-radio-button>
+
+
+            </mat-radio-group>
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come  m-4" (click)="continue18()">Continue</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!--  allergic  -->
+    <div id="div19" style="display: none;">
+        <form [formGroup]="questionFormgroup19" id="form19" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                <a id="back1" class="back_word" (click)="allergic_back_oral_medication()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">Are you allergic to any medications that you’re aware of?
+                    If so, which?</h5>
+
+            </div>
+            <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="allergic">
+                <mat-radio-button value="yes">
+                    <span> yes </span>
+                </mat-radio-button>
+                <mat-radio-button value="no">
+                    <span> no </span>
+                </mat-radio-button>
+
+            </mat-radio-group>
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come  m-4" (click)="continue19()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+    <!-- are you taking any medication  -->
+    <div class="bring" id="div20" style="display:none;">
+
+        <form [formGroup]="questionFormgroup20" id="form6" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                <a id="back1" class="back_word" (click)="taking_medicine_back_allergic()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">Are you taking any of the following medications? Please
+                    check all that apply.</h5>
+                <p>If you want to be evaluated for the Accutane treatment specifically, these medications are
+                    contraindications and will need to be stopped and cannot be taken during treatment.</p>
+            </div>
+
+            <p><mat-checkbox formControlName="supplements">Vitamin A supplements</mat-checkbox></p>
+            <p><mat-checkbox formControlName="tetra"> Tetracycline antibiotics</mat-checkbox></p>
+            <p><mat-checkbox formControlName="birth_control">Progestin only birth control( mini pill)</mat-checkbox></p>
+            <p><mat-checkbox formControlName="dilantin">Dilantin (phenytoin)</mat-checkbox></p>
+            <p><mat-checkbox formControlName="oral_steriods">Oral steriods (such as Prednisone)</mat-checkbox></p>
+            <p><mat-checkbox formControlName="St_john">St. John's Wort</mat-checkbox></p>
+            <p><mat-checkbox formControlName="none">I am not taking any of these</mat-checkbox></p>
+
+
+
+
+
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come   m-4" (click)="continue20()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+    <!-- list any other medication -->
+    <div id="div21" style="display: none;">
+        <form [formGroup]="questionFormgroup21" id="form21" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                <a id="back1" class="back_word" (click)="list_other_medic_back_taking_any_medic()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">Please list any other medications you’re currently taking.
+                    Put “N/A” if none</h5>
+
+            </div>
+            <input type="textarea" formControlName="other_medic_using_current" id="" rows="4" cols="15">
+
+
+
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come  m-4" (click)="continue21()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- skin care products you use currently -->
+    <div class="bring" id="div22" style="display:none;">
+
+        <form [formGroup]="questionFormgroup22" id="form22" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                <a id="back1" class="back_word" (click)="current_use_pro_back_list_other_medic()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">What skincare products do you currently use in your routine? Please check all that apply.</h5>
+                
+            </div>
+
+            <p><mat-checkbox formControlName="cleanser">cleanser</mat-checkbox></p>
+            <p><mat-checkbox formControlName="moisturizer">Moisturizer</mat-checkbox></p>
+            <p><mat-checkbox formControlName="spf">SPF</mat-checkbox></p>
+            <p><mat-checkbox formControlName="toner">Toner</mat-checkbox></p>
+            <p><mat-checkbox formControlName="other">Other</mat-checkbox></p>
+           
+
+
+
+
+
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come   m-4" (click)="continue22()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+    <!-- additional detail on skin care routine -->
+    <div id="div23" style="display: none;">
+        <form [formGroup]="questionFormgroup23" id="form23" style="display: block;">
+            <div class="block-part1">
+                <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+                <a id="back1" class="back_word" (click)="additional_detail_back_current_use_pro()">Back</a>
+            </div>
+            <div class="block-part2">
+                <h5 style="color: black; font-weight: bold;">Please list any other medications you’re currently taking.
+                    Put “N/A” if none</h5>
+
+            </div>
+            <input type="textarea" formControlName="additonal_detail" id="" rows="4" cols="15">
+
+
+
+            <span class="text-danger" *ngIf="gender_error">
+                field is required
+            </span>
+            <div class="block-part2">
+                <div class="block3">
+                    <button class=" formsubmit_come  m-4" (click)="continue23()">Continue</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+<!-- pregnant -->
+<div class="bring" id="div24" style="display:none;">
+    <form [formGroup]="questionFormgroup24" id="form12" style="display: block;">
+        <div class="block-part1">
+            <img style="margin:18px;" src="assets/images/Iconleft.png" alt="" (click)="preg_back_add_detail()"   >
+            <a id="back1" class="back_word" (click)="preg_back_add_detail()">Back</a>
+        </div>
+        <div class="block-part2">
+            <h5 style="color: black; font-weight: bold;">Are you pregnant?</h5>
+            
+        </div>
+        <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="pregnant">
+            <mat-radio-button value="yes">
+                <span> yes </span>
+            </mat-radio-button>
+            <mat-radio-button value="no">
+                <span> no </span>
+            </mat-radio-button>
+
+
+        </mat-radio-group>
+        <span class="text-danger" *ngIf="gender_error">
+            field is required
+        </span>
+        <div class="block-part2">
+            <div class="block3">
+                <button class=" formsubmit_come  m-4" (click)="continue24()">Continue</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<!-- brestfeeding -->
+<div class="bring" id="div25" style="display:none;">
+    <form [formGroup]="questionFormgroup25" id="form12" style="display: block;">
+        <div class="block-part1">
+            <img style="margin:18px;" src="assets/images/Iconleft.png" alt="" (click)="b_feed_back_preg()"   >
+            <a id="back1" class="back_word" (click)="b_feed_back_preg()">Back</a>
+        </div>
+        <div class="block-part2">
+            <h5 style="color: black; font-weight: bold;">Are you breastfeeding?</h5>
+           
+        </div>
+        <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="b_feeding">
+            <mat-radio-button value="yes">
+                <span> yes </span>
+            </mat-radio-button>
+            <mat-radio-button value="no">
+                <span> no </span>
+            </mat-radio-button>
+
+
+        </mat-radio-group>
+        <span class="text-danger" *ngIf="gender_error">
+            field is required
+        </span>
+        <div class="block-part2">
+            <div class="block3">
+                <button class=" formsubmit_come  m-4" (click)="continue25()">Continue</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<!-- taking pills -->
+<div class="bring" id="div26" style="display:none;">
+    <form [formGroup]="questionFormgroup26" id="form12" style="display: block;">
+        <div class="block-part1">
+            <img style="margin:18px;" src="assets/images/Iconleft.png" alt="" >
+            <a id="back1" class="back_word" (click)="pils_back_b_feed()">Back</a>
+        </div>
+        <div class="block-part2">
+            <h5 style="color: black; font-weight: bold;">Are you currently taking birth control/hormonal pills or in the menopause stage?</h5>
+          
+        </div>
+        <mat-radio-group aria-label="Select an option" class="radio-sribed" formControlName="taking_pills">
+            <mat-radio-button value="yes">
+                <span> yes </span>
+            </mat-radio-button>
+            <mat-radio-button value="no">
+                <span> no </span>
+            </mat-radio-button>
+
+
+        </mat-radio-group>
+        <span class="text-danger" *ngIf="gender_error">
+            field is required
+        </span>
+        <div class="block-part2">
+            <div class="block3">
+                <button class=" formsubmit_come  m-4" (click)="continue26()">Continue</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+
+</div>

@@ -1,0 +1,61 @@
+<div class="container" style="align-items: center;padding-left: 373px;padding-right: 600px;  ">
+    <div id="div1">
+        <div class="block-part1">
+            <img style="margin:18px;" src="assets/images/Iconleft.png" alt="">
+            <a id="back1" class="back_word" (click)="accutaneeval_back_skincareplan()">Back</a>
+        </div>
+
+        <div class="block-part2">
+
+            <form  [formGroup]="formgroup1"  >
+                <h3 style="color: black; font-weight: bold;">Here’s what you need to know about Accutane (isotretinoin).
+                </h3>
+
+                <h5 style="color: black; font-weight: bold;">yt video
+                </h5>
+                <!-- <iframe src="https://youtu.be/OW9fBf0Crl0" height="400" width="500">
+                </iframe> -->
+
+
+                <iframe width="360" height="215" src="https://www.youtube.com/embed/OW9fBf0Crl0"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+
+                <p>All patients approved for Accutane will be enrolled in the iPledge program and will be prompted to
+                    get bloodwork done after 2 months into treatment.</p><br>
+
+                <p>Female patients are required to either pledge abstinence or be on two forms of approved birth control
+                    during treatment. Female patients must also take monthly pregnancy tests every month (which can be
+                    done at home) and upload the results to the portal after their doctor approves the monthly
+                    prescription as well as answer monthly questions on the ipledgeprogram.com website.</p>
+
+                <p>Per iPledge requirements for female patients, if approved for Accutane by your assigned dermatologist
+                    after submitting this evaluation, there will be a 30 day mandatory "wait period" before receiving
+                    your first supply of pills.</p>
+
+
+                <p><mat-checkbox formControlName="tick">I understand the risks associated with taking Accutane and its
+                        potential side effects, and would like to be evaluated for Accutane.</mat-checkbox></p>
+
+
+
+                <div class="block-part2">
+                    <div class="block3">
+                        <button class=" formsubmit_come   m-4"  (click)="continue()"    >continue</button>
+                    </div>
+                </div>
+
+            <span class="text-danger" *ngIf=error>
+                this field is required
+            </span>
+
+
+            </form>
+        </div>
+
+
+
+    </div>
+
+</div>

@@ -1,0 +1,271 @@
+<section class="checkout-page">
+    <div class="container">
+        <div class="backbutton">
+            <p [routerLink]="['/home']"><img class="img-fluid" src="assets/images/Iconleft.png" alt="back cart"> <span>
+                    &nbsp; Back</span>
+            </p>
+        </div>
+        <div class="options-ship">
+            <ul>
+
+                <li><a class="checkout-list-text active">1. Shipping</a></li>
+                <li><a class="checkout-list-text">2. Payment</a></li>
+
+
+            </ul>
+        </div>
+
+        <!-- checkout page start -->
+        <div class="all">
+        <div class=" checkout       col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <form   [formGroup]="shippingcartForm"   >
+
+                <h1 style="padding:25px">Shipping address </h1>
+
+                first name
+                <div class="form-outline mb-4">
+                    <input type="text" placeholder="First name*" class="form-control form-control-lg"
+                        formControlName="first_name" [pattern]="pattern"
+                        [ngClass]="{'is-invalid':submitted && shippingcartFormControl['first_name'].errors }"/>
+                    <span class="text-danger"
+                *ngIf="shippingcartFormControl.first_name.touched && shippingcartFormControl.first_name.errors?.required">
+                First name field is required
+            </span>
+            <span class="text-danger"
+                *ngIf="shippingcartFormControl.first_name.touched && shippingcartFormControl.first_name.errors?.minlength">
+                name must be greater than 3 charc
+            </span>
+            <span class="text-danger"
+                *ngIf="shippingcartFormControl.first_name.touched && shippingcartFormControl.first_name.errors?.pattern">
+                name must be in characters
+            </span>
+                </div>
+
+                <!-- last name -->
+                <div class="form-outline mb-4">
+                    <input type="text" placeholder="last name*" class="form-control form-control-lg"
+                        formControlName="last_name" [ngClass]="{'is-invalid':submitted && shippingcartFormControl['last_name'].errors }"   />
+                    
+            <span class="text-danger"
+                *ngIf="shippingcartFormControl.last_name.touched && shippingcartFormControl.last_name.errors?.required">
+                last name field is required
+            </span>
+            <span class="text-danger"
+                *ngIf="shippingcartFormControl.last_name.touched && shippingcartFormControl.last_name.errors?.minlength">
+                name must be greater than 3 charc
+            </span>
+            <span class="text-danger"
+                *ngIf="shippingcartFormControl.last_name.touched && shippingcartFormControl.last_name.errors?.pattern">
+                name must be in characters
+            </span>
+                </div>
+
+
+                <!-- addres -->
+                <div class="form-outline mb-4">
+                    <input type="text" placeholder="Enter your address*" class="form-control form-control-lg"
+                        formControlName="addres" [ngClass]="{'is-invalid':submitted && shippingcartFormControl['addres'].errors }"   />
+
+                    <span class="text-danger"
+                *ngIf="shippingcartFormControl.addres.touched && shippingcartFormControl.addres.errors?.required">
+                addres field is required
+            </span>
+
+            <span class="text-danger"
+                *ngIf="shippingcartFormControl.addres.touched && shippingcartFormControl.addres.errors?.minlength">
+                name must be greater than 3 charc
+            </span>
+
+                </div>
+
+
+                <div class="form-outline mb-4">
+                    <input type="text" placeholder="Apt,suite,unit,building,floor,etc."
+                        class="form-control form-control-lg" formControlName="add_t"  [ngClass]="{'is-invalid':submitted && shippingcartFormControl['add_t'].errors }"  />
+                    <span class="text-danger"
+                *ngIf="shippingcartFormControl.add_t.touched && shippingcartFormControl.add_t.errors?.required">
+                this field is required
+            </span>
+                </div>
+
+
+                <!-- city -->
+                <div class="form-outline mb-4">
+                    <input type="text" placeholder="City*" class="form-control form-control-lg"
+                        formControlName="city" [ngClass]="{'is-invalid':submitted && shippingcartFormControl['city'].errors }"    />
+                    <span class="text-danger"
+                *ngIf="shippingcartFormControl.city.touched && shippingcartFormControl.city.errors?.required">
+                this field is required
+            </span>
+            <span class="text-danger"
+                *ngIf="shippingcartFormControl.city.touched && shippingcartFormControl.city.errors?.pattern">
+                name must be in characters
+            </span>
+
+                </div>
+
+                <!-- state dropdown  -->
+                <select class="form-control form-control-lg ng-pristine ng-invalid ng-touched  form-outline mb-4"
+                    formControlName="state"  [ngClass]="{'is-invalid':submitted && shippingcartFormControl['state'].errors }"   >
+
+                    <option ng-reflect-value="">Select State</option>
+                    <option class="ng-star-inserted">dnh</option>
+                </select>
+                <span class="text-danger"
+            *ngIf="shippingcartFormControl.state.touched && shippingcartFormControl.state.errors?.required">
+            FIELD IS REQUIRED
+        </span> 
+
+                <!-- city code -->
+                <div class="form-outline mb-4">
+                    <input type="text" placeholder="City code*" class="form-control form-control-lg"
+                        formControlName="city_code" [ngClass]="{'is-invalid':submitted && shippingcartFormControl['city_code'].errors }"     />
+
+                    <span class="text-danger"
+                *ngIf="shippingcartFormControl.city_code.touched && shippingcartFormControl.city_code.errors?.required">
+                City required.
+            </span>
+            <span class="text-danger"
+                *ngIf="shippingcartFormControl.city_code.touched && shippingcartFormControl.city_code.errors?.maxlength">
+                City must be at least 3 characters long.
+            </span>
+                </div>
+
+
+                <!-- email -->
+                <div class="form-outline mb-4">
+                    <input type="email" placeholder="email*" class="form-control form-control-lg"
+                        formControlName="email"   [ngClass]="{'is-invalid':submitted && shippingcartFormControl['email'].errors }" />
+                    <span class="text-danger"
+                *ngIf="shippingcartFormControl.email.touched && shippingcartFormControl.email.errors?.required">
+                field is required
+            </span>
+            <span class="text-danger"
+                *ngIf="shippingcartFormControl.email.touched && shippingcartFormControl.email.errors?.email">
+                plz write valid email
+            </span>
+
+
+
+                </div>
+
+
+                <!-- phone number -->
+                <div class="form-outline mb-4">
+                    <input type="text" placeholder="phone number*" class="form-control form-control-lg"
+                        formControlName="phone_number"  [ngClass]="{'is-invalid':submitted && shippingcartFormControl['phone_number'].errors }"   />
+                    <span class="text-danger"
+                *ngIf="shippingcartFormControl.phone_number.touched && shippingcartFormControl.phone_number.errors?.required">
+                This field is required
+            </span>
+            <span class="text-danger"
+                *ngIf="shippingcartFormControl.phone_number.touched && shippingcartFormControl.phone_number.errors?.minlength">
+                City must be at least 10 DIGIT long.
+            </span>
+
+
+                </div>
+
+
+
+            </form>
+            <h1 style="padding:15px">Shipping method </h1>
+
+            <span class="ng-star-inserted">Standard shipping via USPS. We typically process orders within the next
+                business day
+                after your dermatologist approves treatment and shipping usually takes between 5-7 business days.
+            </span>
+
+            <div style="margin-bottom: 25px;" classks="checkout-lastsection mt-4 align-items-center "><span
+                    class="submit-btn"><a>
+                        <button type="submit" style="background-color: rgb(187, 167, 241);"   (click)="payment()"
+                            class="mat-focus-indicator w-100 mat-stroked-button mat-button-base">
+                            <span class="mat-button-wrapper">
+                                Continue to payment</span><span matripple="" class="mat-ripple mat-button-ripple"
+                                ng-reflect-disabled="false" ng-reflect-centered="false">
+
+                            </span><span class="mat-button-focus-overlay"></span></button></a></span>
+                        
+                        </div>
+
+
+
+
+        </div>
+        <div class="col-md-8 col-lg-7 col-xl-6 d-flex">
+            <div class="card">
+                <div class="card-header">
+                    <h2> Cart</h2>
+                    <h2> {{uuid}}</h2>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered m-0">
+                            <thead>
+                                <tr>
+                                    <!-- Set columns width -->
+                                    <th class="text-center py-3 px-2" style="min-width: 331px;">
+                                        Product details </th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let pro of productlist;">
+                                    <td class="p-4">
+                                        <div class="media align-items-center">
+                                            <!-- img -->
+                                            <img style="height:35px;" src="{{imageDirectorypath}}{{pro.image_url}}"
+                                                class="d-block ui-w-40 ui-bordered mr-4" alt="">
+
+                                            <!-- product name -->
+                                            <a href="#" class="d-block text-dark">{{pro.id}}{{pro.title}}</a>
+                                        </div>
+                                    </td>
+
+                                    <td class="text-right font-weight-semibold align-middle p-4">{{pro.price}}
+
+                                    </td>
+                                    <td class="align-middle p-4"><input type="text" class="form-control text-center"
+                                            value="{{pro.qty}}">
+                                    </td>
+                                    <td class="text-right font-weight-semibold align-middle p-4">{{pro.qty
+                                        *pro.price | currency:'₹'}}
+
+                                    </td>
+                                    <!-- <td class="text-center align-middle px-0"><a href="#"
+                                            class="shop-tooltip close float-none text-danger" title=""
+                                            data-original-title="Remove">×</a>
+                                    </td> -->
+
+                                </tr>
+                            </tbody>
+
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+ 
+
+    <!-- checkout page end -->
+
+
+</div>
+    
+</section>

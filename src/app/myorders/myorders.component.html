@@ -1,0 +1,123 @@
+<p>myorders works!</p>
+
+
+
+
+<div class="container px-3 my-5 clearfix">
+    <!-- Shopping cart table -->
+    <div class="card">
+        <div class="card-header">
+            <h2> My Orders</h2>
+            <h2> {{uuid}}</h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered m-0">
+                <thead>
+                  <tr>
+                    <!-- Set columns width -->
+                    <th class="text-center py-3 px-4" style="min-width: 400px;">Product Name &amp; Details</th>
+                    <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
+                    <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
+                    <th class="text-center py-3 px-4" style="width: 120px;">payment status</th>
+                    <th class="text-right py-3 px-4" style="width: 100px;">Total</th>
+                    <th class="text-right py-3 px-4" style="width: 100px;">actions</th>
+                    <!-- <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th> -->
+                  </tr>
+                </thead>
+                <tbody>
+        
+                  <tr *ngFor="let pro of productlist;">
+                    <td class="p-4">
+                      <div class="media align-items-center"  >
+                        <!-- product image -->
+                        <img style="height: 25px;" src="{{imageDirectorypath}}{{pro.image_url}}" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                        <div class="media-body">
+                            <!-- product name -->
+                          <a href="#" class="d-block text-dark">Product Name : {{pro.title}}</a>
+                          <!-- <small>
+                  
+                            <span class="text-muted">Color:</span>
+                            <span class="ui-product-color ui-product-color-sm align-text-bottom" style="background:#e81e2c;"></span> &nbsp;
+                            <span class="text-muted">Size: </span> EU 37 &nbsp;
+                            <span class="text-muted">Ships from: </span> China
+                          </small> -->
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-right font-weight-semibold align-middle p-4">{{pro.price}}</td>
+                    <td class="align-middle p-4"><input type="text" class="form-control text-center" value="{{pro.qty}}" ></td>
+                    <td class="align-middle p-4"><input type="text" class="form-control text-center" value="{{pro.status}}" ></td>
+                    <td class="text-right font-weight-semibold align-middle p-4">{{pro.qty * pro.price | currency:'₹'}}</td>
+                    <td class="text-center align-middle px-0"><a data-toggle="modal" data-target="#exampleModal" class=" btn-primary"  (click)="displyporder_details(pro.id)" title="" data-original-title="details">details</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- / Shopping cart table -->
+        
+            <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
+              <div class="mt-4">
+                <label class="text-muted font-weight-normal">Promocode</label>
+                <input type="text" placeholder="ABC" class="form-control">
+              </div>
+              <div class="d-flex">
+                <div class="text-right mt-4 mr-5">
+                  <!-- <label class="text-muted font-weight-normal m-0">Discount</label>
+                  <div class="text-large"><strong>$20</strong></div> -->
+                </div>
+                <div class="text-right mt-4">
+                  <label class="text-muted font-weight-normal m-0">Total price</label>
+                  <div class="text-large"><strong >{{total}}</strong></div>
+                </div>
+              </div>
+            </div>
+                        
+            <!-- <div class="float-right" >
+              <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping</button>
+              <button  type="button" class="btn btn-lg btn-primary mt-2" >Checkout</button>
+            </div> -->
+        
+          </div>
+      </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Detail Description of product </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <tr *ngFor="let pro of list;">
+                <td class="p-4">
+                  <div class="media align-items-center"  >
+                    <!-- product image -->
+                    <img style="height: 25px;" src="{{imageDirectorypath}}{{pro.image_url}}" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                    <div class="media-body">
+                        <!-- product name -->
+                      <a href="#" class="d-block text-dark">Product Name : {{pro.title}}</a>
+                    
+                    </div>
+                  </div>
+                </td>
+                <td class="text-right font-weight-semibold align-middle p-4">{{pro.price}}</td>
+                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="{{pro.qty}}" ></td>
+                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="{{pro.status}}" ></td>
+                <td class="text-right font-weight-semibold align-middle p-4">{{pro.qty * pro.price | currency:'₹'}}</td>
+                
+              </tr>
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

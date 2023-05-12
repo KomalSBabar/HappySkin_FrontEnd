@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="row row-zippage">
+
+        <section class="maincode-page zipcode fullpage bg-third ">
+            <div class="container-fluid p-0">
+                <!-- <div class="ouert-section"> -->
+                <div class="row">
+                    <div class="col-lg-6 col-xl-5 col-md-12">
+                        <div class="image-block ">
+                            <!--<img class="img-fluid" src="assets/images/origin-img.jpg" alt="imgblock">-->
+                            <img class="img-fluid" src="assets/images/girl2.PNG" alt="imgblock">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-7 col-md-12">
+                        <div class="right-side" style="padding-left: 75px;    padding-right: 276px;">
+
+                            <div class="gayab" id="div_gayab" style="display:block">
+                                <div class="block-part1">
+                                    <img style="margin:18px;" src="assets/images/Iconleft.png" (click)="b()" alt="">
+                                    <a id="back1" class="back_word" (click)="b()">Back</a>
+                                    <!-- <a style="display:none"  id="back3" class="back_word"  (click)="b2()"  >Back</a>  -->
+
+
+                                </div>
+                                <div class="go" id="go">
+                                    <div class="block-part2">
+                                        <h5 style="color: black; font-weight: bold;">Hello,</h5>
+                                    </div>
+                                    <div class="block-part2">
+
+                                        <p class="m-0 content-text">Let’s check to see if we’re available in your state
+                                            first!
+                                        </p>
+
+
+                                    </div>
+                                    <div class="block-part2">
+                                        <form [formGroup]="zipcodeFormgroup" id="form1">
+                                            <div class="mt32">
+                                                <div class="formgroup">
+                                                   <!-- <label class="uszipcode_label" for="uszipcode">U.S zipcode</label>  -->
+                                                    <input type="text" class="form-control" formControlName="zipcode"
+                                                        placeholder="5-digit zipcode"
+                                                        [ngClass]="{'is-invalid':submitted && zipcodeFormControls['zipcode'].errors}" />
+                                                    <span class="text-danger"
+                                                        *ngIf="zipcodeFormControls.zipcode.touched && zipcodeFormControls.zipcode.errors?.required">
+                                                        field is required
+
+                                                    </span>
+
+                                                    <span class="text-danger"
+                                                        *ngIf="zipcodeFormControls.zipcode.touched && zipcodeFormControls.zipcode.errors?.maxlength">
+                                                        zip code must be five digit long
+
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label>
+                                                    <input type="checkbox" formControlName="checkblock">
+                                                    I agree to the Terms of ServicePrivacy Policy , and
+                                                    Telehealth Consent.
+                                                </label>
+
+                                            </div>
+                                            <div class="mt32">
+                                                <button type="submit" (click)="sub()"
+                                                    class="form-control      formsubmit">
+                                                    submit </button>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="div_dekho" style="display:none">
+                                <!-- <div class="come" style="display:none" id="come1"> -->
+                                <!-- <div class="container"> -->
+                                <div class="block-part1">
+                                    <img style="margin:18px;" src="assets/images/Iconleft.png" (click)="b2()" alt="">
+                                    <a class="back_word" id="back2" (click)="b2()">Back</a>
+
+
+
+                                </div>
+                                <div class="block-part2">
+
+                                    <label class="come_label">Look like we're available in your state!</label>
+
+
+                                </div>
+
+                                <div class="block3">
+                                    <button class=" formsubmit_come" (click)="birthd()" >Continue</button>
+                                </div>
+
+                                <!-- </div> -->
+                                <!-- </div> -->
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+            </div>
+        </section>
+    </div>
+</div>

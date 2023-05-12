@@ -1,0 +1,20 @@
+.mat-radio-button {
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid #000;
+    -webkit-tap-highlight-color: transparent;
+    overflow: hidden;
+    min-width: 500px;
+    outline: 0;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.formsubmit_come{
+    background-color: rgb(132, 208, 238);
+    border-radius: 25px;
+    height: 35px;
+    width: 194px;
+    border-color: aliceblue;
+    /* padding-top: 45px; */
+}

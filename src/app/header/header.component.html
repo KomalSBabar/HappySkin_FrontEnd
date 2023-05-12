@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <!-- basic -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- mobile metas -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+   <!-- site metas -->
+   <title>Deni</title>
+   <meta name="keywords" content="">
+   <meta name="description" content="">
+   <meta name="author" content="">
+
+
+
+
+
+
+   <!-- style css -->
+
+   <!-- fevicon -->
+   <link rel="icon" href="/assets/images/fevicon.png" type="image/gif" />
+   <!-- Scrollbar Custom CSS -->
+
+
+   <!-- Tweaks for older IEs-->
+   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+   <!-- fonts -->
+   <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+   <!-- owl stylesheets -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.css" rel="stylesheet" />
+</head>
+
+<body>
+   <!-- header section start -->
+   <div class="header_section">
+      <div class="container-fluid">
+         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="logo" href="#"><img class="logo_happy" height="2px" src="assets/images/logo2.png"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                     <a class="nav-link" (click)="home()">Home</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" (click)="about()">About</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" (click)="product()">Shop</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" (click)="blog()">Blog</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" (click)="contact()">FAQ</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" *ngIf="!loginStatus" (click)="login()">login</a>
+                     <a class="nav-link" *ngIf="loginStatus" (click)="logout()">logout</a>
+
+                  </li>
+               </ul>
+               <form class="form-inline my-2 my-lg-0">
+                  <div class="login_menu  m">
+                     <ul>
+                        <!-- <li><a  (click)="login()"   >Login</a></li> -->
+                        <li><a><img (click)="profile()" src="assets/images/user-icon.png"></a></li>
+                        <li><a><img (click)="cart_head()" src="assets/images/trolly-icon.png"></a></li>
+                        <li><a>
+
+                        <div class="search-field d-none d-md-block">
+                           <form [formGroup]="searchForm" class="d-flex align-items-center h-100" action="#">
+                             <div class="input-group">
+                               
+                               <input  formControlName="search" type="text" style="border-radius: 50px; border-color: black;"  class="form-control bg-transparent border-0" placeholder="Search products">
+                               <div class="input-group-prepend bg-transparent" >
+                                 <img  style="height:15px;" src="assets/images/search-icon.png"  (click)="search()">
+                               </div>
+                             </div>
+                           </form>
+                         </div></a></li>
+                    
+                     </ul>
+                  </div>
+               </form>
+            </div>
+         </nav>
+      </div>
+   </div>
+<!-- stripe key -->
+<script src="https://js.stripe.com/v3/"></script>
+
+   <!-- Javascript files-->
+   <script src="./assets/js/jquery.min.js"></script>
+   <script src="./assets/js/popper.min.js"></script>
+   <script src="./assets/js/bootstrap.bundle.min.js"></script>
+   <script src="./assets/js/jquery-3.0.0.min.js"></script>
+   <script src="./assets/js/plugin.js"></script>
+   <!-- sidebar -->
+   <script src="./assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+   <script src="./assets/js/custom.js"></script>
+   <!-- javascript -->
+   <script src="./assets/js/owl.carousel.js"></script>
+   <!-- owl carousel -->
+   <script>
+      $('.owl-carousel').owlCarousel({
+         loop: true,
+         margin: 30,
+         nav: true,
+         responsive: {
+            0: {
+               items: 1
+            },
+            600: {
+               items: 3
+            },
+            1000: {
+               items: 4
+            }
+         }
+      })
+   </script>
