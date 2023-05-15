@@ -14,22 +14,24 @@ export class UserProfileComponent implements OnInit {
   uuid: any;
   nameee: any;
   isEditable:any
+  user_id = localStorage.getItem('userid')
   constructor(private authService: AuthService, public apiservice: ApiService) { }
 
   ngOnInit(): void {
 
+    console.log('user id ', this.user_id)
 
-    this.authService.user_id.subscribe(uid => {
+    // this.authService.user_id.subscribe(uid => {
 
-      console.log("ok uid", uid);
-      this.uuid = uid;
+    //   console.log("ok uid", uid);
+    //   this.uuid = uid;
 
-      this.edit_data(this.uuid)
-    })
+    // })
+      // this.edit_data(this.user_id)
 
 
     let payload = {
-      "id": this.uuid
+      "id": this.user_id
     }
     this.apiservice.getuserdetail(payload).subscribe((res: any) => {
       this.nameee = res.data;
@@ -45,14 +47,14 @@ export class UserProfileComponent implements OnInit {
     })
 
 
-    this.authService.user_id.subscribe(uid => {
+    // this.authService.user_id.subscribe(uid => {
 
-      console.log("ok uid", uid);
-      this.uuid = uid;
+    //   console.log("ok uid", uid);
+    //   this.uuid = uid;
 
-      // this.edit_data(this.uuid)
+    //   // this.edit_data(this.uuid)
 
-    })
+    // })
 
     this.PassworddForm = new FormGroup({
       currentpass: new FormControl(),

@@ -148,13 +148,38 @@ export class ApiService {
     let apiurl = this.baseurl + 'search_pro';
     return this.httpClient.post(apiurl,payload,this.httpOption)
    }
-  //  ch
-  public addAddress(payload:any) {
-		return this.httpClient.post<any>(this.baseurl + 'addCheckoutAddress', payload, { headers: this.httpOption })
+
+   add_address(payload:any):Observable<any>{
+    let apiurl = this.baseurl+'ship';
+    return this.httpClient.post(apiurl,payload,this['httpOption'])
+   }
+
+   public addAddress(payload:any) {
+    let apiurl = this.baseurl+'billing_add';
+		return this.httpClient.post<any>(apiurl, payload, { headers: this.httpOption })
 			.pipe(map(data => {
 				return data;
 			}));
 	}
+
+  public create_cus_id(payload:any){
+    let apiurl = this.baseurl+'cus';
+    return this.httpClient.post<any>(apiurl, payload, { headers: this.httpOption })
+			.pipe(map(data => {
+				return data;
+			}));
+  }
+
+  public store_cusid(payload :any){
+    let apiurl = this.baseurl+'cus_id';
+    return this.httpClient.post<any>(apiurl, payload, { headers: this.httpOption })
+    .pipe(map(data => {
+      return data;
+    }));
+  }
+  
+  //  ch
+ 
 
   public getUserById(id:any) {
     return this.httpClient.get<any>(this.baseurl + 'user/' + id, this.httpOption).pipe(map(data => {

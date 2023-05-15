@@ -10,29 +10,32 @@ import { ApiService } from '../api.service';
 })
 export class OrdercompleteComponent implements OnInit {
   ordernumber:any;
-  uuid: any;
+  user_id: any = localStorage.getItem('userid');
+
   cid:any;
   a:any;
   constructor(private apiService: ApiService, private authService: AuthService,private router: Router) { }
 
   ngOnInit(): void {
     
-    this.authService.user_id.subscribe(uid=>{
+  //   this.authService.user_id.subscribe(uid=>{
       
-      console.log("check",uid);
-      this.uuid =  uid,
+  //     console.log("check",uid);
+  //     this.uuid =  uid,
     
     
-   this.getCartId(this.uuid);
+  //  this.getCartId(this.user_id);
+  //  this.getOrderNumber(this.cid);
+  //   })
+    this.getCartId(this.user_id);
    this.getOrderNumber(this.cid);
-    })
   }
 
   getCartId(argguments:any){
-    this.a = this.uuid;
+    this.a = this.user_id;
   
   let payload={
-    u_id :this.uuid
+    u_id :this.a
   }
   this.apiService.cartid(payload).subscribe((res:any)=>{
     this.cid = res.data
@@ -41,11 +44,9 @@ export class OrdercompleteComponent implements OnInit {
   }
 
 
-
-
   getOrderNumber(argguments:any){
     let payload = {
-      "u_id":this.uuid,
+      "u_id":this.user_id,
       "c_id":this.cid
     }
     this.apiService.getordnumber(payload).subscribe((res:any)=>{

@@ -32,10 +32,11 @@ export class ShippingcartComponent implements OnInit {
   cartitemlength: any = 0;
   localCart = JSON.parse(localStorage.getItem('localCart') || '{}');
   shippingcartForm: any;
+  cid: any;
   constructor(private apiService: ApiService, private authService: AuthService, private router: Router) { }
   pattern: string | RegExp = '^[a-zA-Z]*';
   ngOnInit(): void {
-
+    this.uuid = localStorage.getItem('userid')
     if(localStorage.getItem('token') !== null)
     {
       this.loggedIn = true;
@@ -56,7 +57,7 @@ export class ShippingcartComponent implements OnInit {
       phone_number: new FormControl('', [Validators.required,Validators.minLength(9)]),
     })
 
-
+    this.getCartId(this.uuid);
     this.getCartItem();
 
 
@@ -113,7 +114,17 @@ get shippingcartFormControl() {
 
     })
   }
+  getCartId(argguments: any) {
 
+    this.a = this.uuid;
+    let payload = {
+      u_id: this.uuid
+    }
+    this.apiService.cartid(payload).subscribe((res: any) => {
+      console.log('cartids', res);
+      this.cid = res.data
+    })
+  }
   payment() {
 
     console.log('payment clicked')
@@ -123,13 +134,33 @@ get shippingcartFormControl() {
      
       return
     }else {
-      console.log('payment clicked valid  ')
+      let payload = {
+        "u_id": this.uuid,
+        "c_id": this.cid,
+        "first_name": this.shippingcartForm.value.first_name,
+        "last_name": this.shippingcartForm.value.last_name,
+        "addres": this.shippingcartForm.value.addres,
+        "add_t": this.shippingcartForm.value.add_t,
+        "city": this.shippingcartForm.value.city,
+        "state": this.shippingcartForm.value.state,
+        "city_code": this.shippingcartForm.value.city_code,
+        "email": this.shippingcartForm.value.email,
+        "phone_number": this.shippingcartForm.value.phone_number,
+        // $user->role_id = json_encode($request->role_id);
+      }
+      this.apiService.add_address(payload).subscribe(res => {
+        console.log('add_responseeeeeeeeeee',res)
+  
+      if(res.data != null){
+        console.log('payment clicked valid  ')
         this.router.navigate(['/payment'])
+      }else{
+        return
+      }
+    })
     }
 
-
-
   }
-
+ 
 
 }

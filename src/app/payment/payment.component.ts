@@ -63,6 +63,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
   billingaddressForm: any;
   case_id: any;
   set_cartid: any;
+  customer_i: any;
 
 
   constructor(private apiService: ApiService, private authService: AuthService,
@@ -89,6 +90,10 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
+
+    this.getCartId(localStorage.getItem('userid'));
+    
+
 
     // var Stripe: any;
 
@@ -139,7 +144,9 @@ export class PaymentComponent implements OnInit, AfterViewInit {
       state: new FormControl('', [Validators.required]),
       city_code: new FormControl('', [Validators.required, Validators.maxLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      phone_number: new FormControl('', [Validators.required, Validators.pattern("^((\\+1-?)|0)?[0-9]{10}$")]),
+      phone_number: new FormControl('', [Validators.required]),
+
+      // phone_number: new FormControl('', [Validators.required, Validators.pattern("^((\\+1-?)|0)?[0-9]{10}$")]),
 
     })
 
@@ -161,6 +168,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
     this.getCheckoutAddress();
   }
+
 
   get paymentFormControl() {
     return this.paymentformgroup.controls
@@ -297,7 +305,17 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
     this.Price_non_pre_product = price_non_pre_product
   }
+  getCartId(argguments: any) {
 
+    this.a = this.uuid;
+    let payload = {
+      u_id: this.uuid
+    }
+    this.apiService.cartid(payload).subscribe((res: any) => {
+      console.log('cartids', res);
+      this.cid = res.data
+    })
+  }
   async place_order() {
 
     this.submitted = true
@@ -305,7 +323,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     // different billing address
     if (this.paymentformgroup.value.shiping_add == "different_billing_address") {
 
-      if (this.paymentformgroup.valid) {
+      
         console.log('shipp insdied valid')
         let s_token = await this.createToken();
         console.log('toki', s_token)
@@ -314,120 +332,66 @@ export class PaymentComponent implements OnInit, AfterViewInit {
           console.log('inside toki')
           // addres store karega 
           let payload1 = {
-            "user_id": localStorage.getItem('userid'),
-            "patient_firstname": this.paymentformgroup.value.first_name,
-            "patient_lastname": this.paymentformgroup.value.last_name,
-            "addressline1": this.paymentformgroup.value.address,
-            "addressline2": this.paymentformgroup.value.add_t,
+            "u_id": localStorage.getItem('userid'),
+            // cartid
+            // "u_id": this.uuid,
+            "c_id": localStorage.getItem('cartid'),
+            "first_name": this.paymentformgroup.value.first_name,
+            "last_name": this.paymentformgroup.value.last_name,
+            "addres": this.paymentformgroup.value.addres,
+            
+
+            "add_t": this.paymentformgroup.value.add_t,
             "city": this.paymentformgroup.value.city,
             "state": this.paymentformgroup.value.state,
-            "zipcode": this.paymentformgroup.value.city_code,
+            "city_code": this.paymentformgroup.value.city_code,
             "email": this.paymentformgroup.value.email,
-            "phone": this.paymentformgroup.value.phone_number,
+            "phone_number": this.paymentformgroup.value.phone_number,
             "address_type": "2",
             "token": localStorage.getItem('token'),
 
           }
           console.log('payloaa', payload1)
-          console.log('uid', payload1.user_id)
+          // console.log('uid', payload1.user_id)
           console.log('uid', payload1.token)
           this.apiService.addAddress(payload1).subscribe(res => {
             console.log('add api', res)
-          });
 
-          this.apiService.getUserById(this.user_id).subscribe(res => {
-            console.log('uidb', res)
-          });
-          this.cartId = localStorage.getItem('cartid');
-
-
-          console.log(this.taxes, 'tax value');
-          let payload = {
-
-            "user_id": localStorage.getItem('userid'),
-            "cart_id": this.cartId,
-
-            "cart_amount": this.total,
-            "total_amount": 33,
-            "patient_firstname": this.paymentformgroup.value.first_name,
-            "patient_lastname": this.paymentformgroup.value.last_name,
-            "email": this.paymentformgroup.value.email,
-            "shipping_method": "2",
-            "shipping_addreess_id": 2,
-            "billing_address_id": "",
-            "card_number": 0,
-            "card_name": this.paymentformgroup.value.cardname,
-
-            "pharmacy_detail": "asfsaasf",
-            "medication_type": 2,
-            "case_id": 0,
-            // "shipping_fee": this.shipping,
-            "shipping_fee": 5,
-            "tax": 0,
-            "gift_code_discount": 0,
-
-            "payment_status": 'pending',
-
-
-            // payment kai liye
-            "order_id": "-",
-            "name": this.user.first_name + ' ' + this.user.last_name,
-            "amount": 33,
-            "stripeToken": s_token,
-            "telemedicine_fee": 0,
-            "reference_note": "Non-Prescribe Product",
-            // "handling_fee": this.shipping,
-            "handling_fee": 5,
-            'ordertype': 'Non-prescribe'
-          }
-
-
-
-          console.log('payload - yeah wala', payload)
-          this.apiService.addPayment(payload).subscribe(res => {
-            console.log('check pay', res);
-
-            this.apiService.getCartItemOfUser(localStorage.getItem('userid')).subscribe(res => {
-              console.log('getCartItemOfUser', res);
-              for (var data of res.data) {
-                console.log(data);
-                let adata = {
-                  status: "purchased",
-                  user_id: this.user_id,
-                  order_type: 'Non-Prescribe',
-                  product_price: data.product_price,
-                  quantity: data.product_quantity,
-                  product_id: data.product_id,
+            if(res.data !== null){
+              let payload2 = {
+                // "email": this.paymentformgroup.value.email,
+                "stripe_token":'tok_visa'
+            }
+        
+        
+            this.apiService.create_cus_id(payload2).subscribe(res =>{
+                console.log('customer id',res.data.id)
+                this.customer_i = res.data.id;
+                if(res.data !== null){
+                  let payload3 = {
+                    "id":this.user_id,
+                    "customer_id":this.customer_i
+                  }
+                  console.log('payload3',payload3)
+                  this.apiService.store_cusid(payload3).subscribe(res =>{
+                      console.log("data stored",res)
+                      if(res.data === 1){
+                      
+                       this.router.navigate(['/ordercomplete', this.a]);
+                      }
+                  })
+                }else{
+                  return
                 }
-                console.log('data.id1', data.id);
-                this.apiService.updateCartItemOfUser(data.id, adata).subscribe((res: any) => {
-                  //localStorage.setItem('order', 'true')
-                  console.log('update_cart', res);
-
-
-
-
-
-                });
-              }
             })
 
-            this.router.navigate(['/ordercomplete/', res]);
+            }else{
+              return
+            }
+
           });
 
-        } else {
-
-          if (!s_token) {
-            // this.notifyService.showError('Card details is required', ' ', 3000);
-            this.router.navigate(['/nonprescribed-paymentfailed']);
-            return;
-          }
-          return;
-        }
       }
-
-
-
 
     }
 
@@ -438,17 +402,30 @@ export class PaymentComponent implements OnInit, AfterViewInit {
       let token = await this.createToken();
       console.log('tokennnnn', token);
 
-      if (token) {
+     
+      let payload2 = {
+        // "email": this.paymentformgroup.value.email,
+        "stripe_token":'tok_visa'
+    }
 
-        let payload = {
-          "user_id": localStorage.getItem('userid'),
-          "cart_id": this.cartId,
-          "cart_amount": this.Price,
-          "total_amount": this.Price,
 
+    this.apiService.create_cus_id(payload2).subscribe(res =>{
+      console.log('customer id',res.data.id)
+      if(res.data !== null){
+        let payload3 ={
+          "id":this.user_id,
+          "customer_id":this.customer_i
         }
-
+        this.apiService.store_cusid(payload3).subscribe(res => {
+          if(res.data !== null){
+                      
+            this.router.navigate(['/ordercomplete', this.user_id]);
+           }
+        })
       }
+    })
+
+   
 
     }
 
@@ -584,28 +561,69 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     });
   }
 
+  // getCartItem() {
+  //   if (this.loggedIn === true) {
+
+  //     console.log('login kain andar')
+  //     this.apiService.getCartItemOfUser(localStorage.getItem('userid')).subscribe((res) => {
+  //       console.log('getCartItemOfUser', res.data)
+
+  //       for (var data of res.data) {
+
+  //         this.response.push(data.id);
+  //         console.log('distinctArray response', this.response);
+
+
+  //         data.imageurl = this.imageurl + data.product_image;
+  //         this.total += data.product_price * data.product_quantity;
+  //       }
+
+
+  //     });
+
+
+  //   }
+
+  // }
   getCartItem() {
-    if (this.loggedIn === true) {
-
-      console.log('login kain andar')
-      this.apiService.getCartItemOfUser(localStorage.getItem('userid')).subscribe((res) => {
-        console.log('getCartItemOfUser', res.data)
-
-        for (var data of res.data) {
-
-          this.response.push(data.id);
-          console.log('distinctArray response', this.response);
-
-
-          data.imageurl = this.imageurl + data.product_image;
-          this.total += data.product_price * data.product_quantity;
-        }
-
-
-      });
-
-
+   
+    let payload ={
+      u_id : localStorage.getItem('userid')
     }
 
+    this.apiService.displaycart(payload).subscribe(res => {
+      console.log(res)
+
+      this.productlist = res.data
+      console.log("89", this.productlist)
+      this.productlist.forEach((data: any) => {
+
+        this.total = this.total + data.total;
+      })
+
+
+    })
   }
+
+  makePayment(amount:any){
+      const  paymentHandler = (<any>window).StripeCheckout.configure({
+        key :'pk_test_51J08tDJofjMgVsOdG6uXh2LUBtjObBJiQ719j0yI1EyKipIJLj1ZZvYLvVJ1IUJ5egeA2njTg7GJLOQt1fD3IIH9002jPaahNB',
+        locale:'auto',
+        token:function(stripeToken:any){
+          console.log(stripeToken.card);
+          alert('stripe token generated');
+        },
+      });
+
+      paymentHandler.open({
+        // passed static values for now
+        name:'komal',
+        description:'non-prescribe product',
+        amount: 50,
+      });
+
+  }
+
+
+
 }

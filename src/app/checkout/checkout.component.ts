@@ -92,43 +92,14 @@ export class CheckoutComponent implements OnInit {
       // $user->role_id = json_encode($request->role_id);
     }
     console.log("pay", payload);
-    // this.j = false;
-    // this.k = false;
+ 
     this.apiService.shipping(payload).subscribe(res => {
       alert('data store in shipping table');
       console.log("shipping data", res)
-      // this.k = res.data
-
-
-
-      // if (res.data.success === true) {
-      //   this.k = false;
-
-
-
-
-
+   
         this.router.navigate(['/payment']);
-      // }
-      // else {
-      //   this.j = 'true';
-      //   console.log('error occured', this.j)
-      // }
 
     })
-
-    //   (success) => {
-    //     this.loading = true;
-    //     this.data = success.result;
-    //     this.loading = false;
-    //     console.log('Result - ', data);
-    //     console.log('data is received');
-    //   },
-    //  (error) => {
-    //    this.errorApi = true;
-    //    console.log('Error state from API:,' error)}
-
-
 
   }
 

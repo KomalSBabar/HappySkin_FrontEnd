@@ -46,6 +46,7 @@ const routes: Routes = [
   { path: 'checkout',component: CheckoutComponent},
   { path: 'payment',component: PaymentComponent},
   { path: 'ordercomplete/:id',component:  OrdercompleteComponent},
+  { path: 'ordercomplete',component:  OrdercompleteComponent},
   { path: 'orders',component:  MyordersComponent},
   { path: 'blogs',component:  BlogComponent},
   { path: 'contact',component:  ContactComponent},
