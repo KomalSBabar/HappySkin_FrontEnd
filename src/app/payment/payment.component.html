@@ -1,4 +1,4 @@
-<section class="checkout-page">
+<section class="checkout-page" style="height:100vh"  >
     <div class="container">
         <div class="backbutton">
             <p [routerLink]="(['/shippingcart'])"><img class="img-fluid" src="assets/images/Iconleft.png"
@@ -329,8 +329,8 @@
                                             </tr>
                                         </thead>
             
-                                        <tbody>
-                                            <tr *ngFor="let pro of productlist;">
+                                        <tbody *ngFor="let pro of productlist;"   >
+                                            <tr>
                                                 <td class="p-4">
                                                     <div class="media align-items-center">
                                                         <!-- img -->
@@ -348,16 +348,21 @@
                                                 <td class="align-middle p-4"><input type="text" class="form-control text-center"
                                                         value="{{pro.qty}}">
                                                 </td>
-                                                <td class="text-right font-weight-semibold align-middle p-4">{{pro.qty
-                                                    *pro.price | currency:'₹'}}
-            
-                                                </td>
+                                               
+                                                <!-- <td class="text-right font-weight-semibold align-middle p-4">{{pro.qty * pro.price | currency:'$'}}</td> -->
                                                 <!-- <td class="text-center align-middle px-0"><a href="#"
                                                         class="shop-tooltip close float-none text-danger" title=""
                                                         data-original-title="Remove">×</a>
                                                 </td> -->
             
                                             </tr>
+                                            <!-- <tr>
+                                                <td class="text-right font-weight-semibold align-middle p-4">
+                                                    {{pro.qty  * pro.price | currency:'$'}}
+            
+                                                </td>
+                                            </tr> -->
+                                           
                                         </tbody>
             
             

@@ -25,8 +25,3 @@ export class DashboardComponent implements OnInit {
  
 
 }}
-export class AppComponent {
-  title = 'Tour of Heroes';
-  heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
-  myHero = this.heroes[0];
-}

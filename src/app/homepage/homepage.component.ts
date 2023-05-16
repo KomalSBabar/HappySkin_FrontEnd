@@ -56,7 +56,7 @@ this.authService.isLoggedIn.subscribe((status)=>{
     this.authService.user_id.subscribe(uid=>{
       
     console.log("ok uid",uid);
-    this.uuid =  uid
+    this.uuid = localStorage.getItem('userid')
     
     
     })

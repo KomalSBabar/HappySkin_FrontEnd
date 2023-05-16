@@ -1,0 +1,12 @@
+li{
+    display: inline-block;
+   padding-left: 25px;
+   
+}
+.checkout-page{
+   min-height:100vh!important;
+   display: flex;
+}
+.all{
+    display: flex;
+}

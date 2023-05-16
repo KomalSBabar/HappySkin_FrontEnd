@@ -1,6 +1,74 @@
-<p>dashboard works!</p>
-<p>adminpanel works!</p>
-  <div class="row">
+
+<div class="sidebar">
+  <a routerLink="/about" class="col">About</a>
+  <a class="active" routerLink="/home">Home</a>
+  <a routerLink="/profile">Profile</a>
+  <a routerLink="/orders">Orders</a>
+  <a routerLink="/dashboardshipments">Shipments</a>
+  <a routerLink="/logout">Logout</a>
+
+</div>
+<div class="content">
+  <div>
+    <!-- <p style="font-size: 50px;">Hi&nbsp;{{first_name}}! Let's Check Your Activity</p> -->hiiii
+</div>
+<hr>
+
+<section class="blog" style="padding-bottom: 300px;padding-top: 120px;">
+  <div class="blog1">
+      <div class="container-fluid" style="padding-left: 100px;">
+          <div class="row">
+              <div class="col-md-8">
+                  <p style="max-width: 100%;font-size: 60px;font-weight: bold;text-decoration: underline;">
+                      Thoughts</p>
+                  <div class="row" style="padding-top: 30px;">
+                      <div class="col-md-1">
+                          <div class="thoughts">
+                              <img src="../../assets/images/Michael Chang.jpg" alt="images"
+                                  style="max-width: 100%;width:150px;height:100px">
+                          </div>
+                      </div>
+                      <div class="col-md-5">
+                          <div class="thoughts">
+                              <p style="font-size: 20px;">
+                                  Written by Michael Chang<br>
+                                  Medically reviewed by Dr. Aaron Farberg<br>
+                                  Last updated 9/23/2021<br>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row" style="padding-top: 50px;">
+                      <div class="col-md-8">
+                          <p style="font-size: 40px;">The Accutane Stigma –
+                              Examining the Concerns</p>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-8">
+                          <p style="font-size: 25px;">The Accutane Stigma – Examining the Concerns
+                              When we created Clear Health we thought long and hard about centering our
+                              initial
+                              focus
+                              on Accutane, a drug whose name triggers a rather polarizing response</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <img src="../../assets/images/blog_img.png" alt="images" style="max-width: 100%;">
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+  <!-- <div class="row">
     <div class="col" *ngFor="let pro of productlist; let myindex =index">
       <div class="col-md-4 col-sm-6">
         <div class="container_card_block">
@@ -8,7 +76,7 @@
             <div class="card-img-top">
               <img class="card-img-top" src="{{imageDirectorypath}}{{pro.image_url}}" alt="Card image cap">
               <div class="card-body">
-                <!-- <img src="{{imageDirectorypath}}{{pro.image_url}} "   > -->
+               
                 <h3 class="card-title">{{pro.title}}</h3>
                 <h3 class="card-text">{{pro.price}}</h3>
               </div>
@@ -17,4 +85,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+</div>

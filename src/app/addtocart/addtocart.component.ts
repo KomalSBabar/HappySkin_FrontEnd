@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
 export class AddtocartComponent implements OnInit {
   productlist: any = [];
   total: number = 0;
-  uuid: any;
+  uuid: any = localStorage.getItem('userid');
   resp: any;
   loggedIn: any;
   a: any;
@@ -23,13 +23,13 @@ export class AddtocartComponent implements OnInit {
     private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.authService.user_id.subscribe(uid => {
+    // this.authService.user_id.subscribe(uid => {
 
-      console.log("ok uid", uid);
-      this.uuid = uid,
-        this.displayc(this.uuid);
+    //   console.log("ok uid", uid);
+    //   this.uuid = uid,
+    //     this.displayc(this.uuid);
 
-    })
+    // })
 
     // if (localStorage.getItem('token') !== null) {
     //   this.loggedIn = true;
@@ -38,6 +38,7 @@ export class AddtocartComponent implements OnInit {
     // else {
     //   this.loggedIn = false
     // }
+    this.displayc(this.uuid);
     this.displaycart();
   }
 
