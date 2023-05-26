@@ -21,7 +21,7 @@ export class ShippingfrequencyComponent implements OnInit {
 
   continue(){
     
-    this.router.navigate(['checkout']);
+    this.router.navigate(['shippingcart']);
 
   }
 }

@@ -33,13 +33,7 @@ export class HomepageComponent implements OnInit {
   constructor(public apiservice:ApiService,private router: Router,private authService:AuthService) { }
 
   ngOnInit(): void {
-  //   this.apiservice.display_random_products().subscribe(res=>{
-  //     console.log(res)
-  //       this.productlist = res.data
-  //     console.log(this.productlist)
-  // });
-
-  
+ 
   this.apiservice.displayproduct().subscribe(res=>{
         console.log(res)
           this.productlist = res.data
@@ -51,6 +45,7 @@ this.authService.isLoggedIn.subscribe((status)=>{
 })
 
   }
+  // pro crat old start
   pro_cart(argguments : any ){
     console.log('agyiiiiiii')
     this.authService.user_id.subscribe(uid=>{
@@ -77,7 +72,9 @@ this.authService.isLoggedIn.subscribe((status)=>{
     this.router.navigate(['/cart']);
     
     }
-     
+    //  pro cart old end
+
+    
     addtocartlocal(id:any){
       console.log('addtocartlocal_without_login')
       this.localcart =localStorage.getItem('localCart');

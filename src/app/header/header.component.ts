@@ -4,6 +4,7 @@ import { ApiService } from '../api.service';
 import { AuthService } from '../auth.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ThisReceiver } from '@angular/compiler';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,8 @@ export class HeaderComponent implements OnInit {
   loginStatus: boolean = false;
   searchForm: any;
   g:any;
-  constructor(private router: Router, private apiService: ApiService, private authService: AuthService) { }
+  message: any;
+  constructor(private router: Router,  private toastr: ToastrService,private apiService: ApiService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.k = localStorage.getItem('token')
@@ -79,6 +81,8 @@ export class HeaderComponent implements OnInit {
     // this.router.navigate(['\home'])
     localStorage.getItem('userid');
     localStorage.removeItem('userid');
+    this.message = "user logout succesfully";
+    this.toastr.success(this.message);
       this.authService.logoutUser();    
     this.authService.isLoggedIn.subscribe((status) => {
       this.router.navigate(['\home'])  
@@ -98,6 +102,8 @@ export class HeaderComponent implements OnInit {
 
         this.apiService.search_product(payload).subscribe(res=>{
            this.g = res.data.title
+          localStorage.setItem('searchkey',res.data.title)
+
            this.router.navigate(['\search']);
         })
         

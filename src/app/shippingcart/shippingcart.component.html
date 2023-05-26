@@ -104,8 +104,25 @@
 
                 </div>
 
+
+                <!-- state -->
+                <div class="form-outline mb-4">
+                    <input type="text" placeholder="City*" class="form-control form-control-lg"
+                        formControlName="state" [ngClass]="{'is-invalid':submitted && shippingcartFormControl['state'].errors }"    />
+                    <span class="text-danger"
+                *ngIf="shippingcartFormControl.state.touched && shippingcartFormControl.state.errors?.required">
+                this field is required
+            </span>
+            <span class="text-danger"
+                *ngIf="shippingcartFormControl.state.touched && shippingcartFormControl.state.errors?.pattern">
+                name must be in characters
+            </span>
+
+                </div>
+
+
                 <!-- state dropdown  -->
-                <select class="form-control form-control-lg ng-pristine ng-invalid ng-touched  form-outline mb-4"
+                <!-- <select class="form-control form-control-lg ng-pristine ng-invalid ng-touched  form-outline mb-4"
                     formControlName="state"  [ngClass]="{'is-invalid':submitted && shippingcartFormControl['state'].errors }"   >
 
                     <option ng-reflect-value="">Select State</option>
@@ -114,7 +131,7 @@
                 <span class="text-danger"
             *ngIf="shippingcartFormControl.state.touched && shippingcartFormControl.state.errors?.required">
             FIELD IS REQUIRED
-        </span> 
+        </span>  -->
 
                 <!-- city code -->
                 <div class="form-outline mb-4">

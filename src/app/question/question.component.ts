@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { count } from 'console';
+import { ApiService } from '../api.service';
 // import {MatRadioModule} from '@angular/material/radio';
 
 @Component({
@@ -82,7 +83,7 @@ export class QuestionComponent implements OnInit {
 
 
 
-  constructor(private router: Router, private _formBuilder: FormBuilder) { }
+  constructor(private router: Router,public apiservice:ApiService, private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -304,6 +305,8 @@ export class QuestionComponent implements OnInit {
       this.div_second = document.getElementById('div2');
       this.div_first.style.display = 'none';
       this.div_second.style.display = 'block';
+
+     
     }
     else {
       console.log(' not valid - first form')
@@ -312,9 +315,24 @@ export class QuestionComponent implements OnInit {
 
   // second form multiple gen se birth gen kai tarf 
   continue2() {
+  
+
+const check =this.questionFormgroup2.value
+const check_str = JSON.stringify(check);
+  let  payload ={
+    "user_id" : localStorage.getItem('userid'),
+    "question":"What gender do you identify as?",
+    "response" :check_str
+  }
+
+  this.apiservice.question_res(payload).subscribe((res: any)=>{
+        console.log('first question',res)
+  });
 
 
-    if (this.questionFormgroup2.valid) {
+
+
+    if (this.questionFormgroup2.valid){
       this.gender_error = false;
       this.div_first = document.getElementById('form1');
       this.div_second = document.getElementById('div2');
@@ -322,14 +340,42 @@ export class QuestionComponent implements OnInit {
       this.div_first.style.display = 'none';
       this.div_second.style.display = 'none';
       this.div_third.style.display = 'block';
+
+
+   
+
     } else {
       console.log(' not valid - second form')
       this.gender_error = true;
     }
+
+
+
+
   }
 
   // birth gen male ,female dono ko algh screen dikhani hain
   continue_gen() {
+
+    const check =this.questionFormgroup3.value
+const check_str = JSON.stringify(check);
+  let  payload ={
+    "user_id" : localStorage.getItem('userid'),
+    "question":"What was your gender assigned at birth?",
+    "response" :check_str
+  }
+
+  this.apiservice.question_res(payload).subscribe((res: any)=>{
+        console.log('first question',res)
+  });
+
+
+
+
+
+
+
+
     if (this.questionFormgroup3.valid) {
       this.gender_error = false;
       this.val_gen = this.questionFormgroup3.value.gen_birth
@@ -1204,6 +1250,21 @@ export class QuestionComponent implements OnInit {
 
   // used topical subscripytion see oral medication tak
   continue17() {
+
+    const check =this.questionFormgroup17.value
+    const check_str = JSON.stringify(check);
+      let  payload ={
+        "user_id" : localStorage.getItem('userid'),
+        "question":"have you ever used topical subscription?",
+        "response" :check_str
+      }
+    
+      this.apiservice.question_res(payload).subscribe((res: any)=>{
+            console.log('first question',res)
+      });
+    
+
+
     if (this.questionFormgroup17.valid) {
       console.log('this', this.questionFormgroup17.value)
       this.gender_error = false;
@@ -1482,6 +1543,16 @@ export class QuestionComponent implements OnInit {
 
  
   continue20(){
+
+
+
+
+
+
+
+
+
+
     console.log(this.questionFormgroup20.value) 
      
     if(this.questionFormgroup20.valid){
@@ -1930,6 +2001,23 @@ export class QuestionComponent implements OnInit {
 
   // pregnent to 
   continue24(){
+
+      
+const check =this.questionFormgroup24.value
+const check_str = JSON.stringify(check);
+  let  payload ={
+    "user_id" : localStorage.getItem('userid'),
+    "question":"are you pregnant?",
+    "response" :check_str
+  }
+
+  this.apiservice.question_res(payload).subscribe((res: any)=>{
+        console.log('first question',res)
+  });
+
+
+
+
     if (this.questionFormgroup24.valid) {
       this.gender_error = false;
       this.div_first = document.getElementById('form1');
@@ -2046,6 +2134,22 @@ export class QuestionComponent implements OnInit {
 
   // are you breastfeeding
   continue25(){
+
+    const check =this.questionFormgroup25.value
+    const check_str = JSON.stringify(check);
+      let  payload ={
+        "user_id" : localStorage.getItem('userid'),
+        "question":"are you breastfeeding?",
+        "response" :check_str
+      }
+    
+      this.apiservice.question_res(payload).subscribe((res: any)=>{
+            console.log('first question',res)
+      });
+    
+    
+    
+
     if (this.questionFormgroup25.valid) {
       this.gender_error = false;
       this.div_first = document.getElementById('form1');
@@ -2165,6 +2269,22 @@ export class QuestionComponent implements OnInit {
 
 // taking pills
 continue26(){
+
+
+  const check =this.questionFormgroup26.value
+  const check_str = JSON.stringify(check);
+    let  payload ={
+      "user_id" : localStorage.getItem('userid'),
+      "question":"are you pregnant?",
+      "response" :check_str
+    }
+  
+    this.apiservice.question_res(payload).subscribe((res: any)=>{
+          console.log('first question',res)
+    });
+  
+  
+
   if (this.questionFormgroup26.valid) {
     this.gender_error = false;
     this.div_first = document.getElementById('form1');
@@ -2316,6 +2436,20 @@ continue26(){
     this.a = argguments
 
   }
+
+
+  continue27(){
+    // let val ='';
+    // for(let i=0;i<26;i++)
+    // {
+    //  val = "Object.keys(this.questionFormgroup.value)";
+    //  console.log(val);
+    
+    // }
+
+  }
+
+  
 
 
 }

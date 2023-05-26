@@ -24,14 +24,14 @@ export class MyordersComponent implements OnInit {
 
       console.log("ok uid", uid);
       this.uuid = uid,
-        this.displayorders(this.uuid);
+        this.displayorders(localStorage.getItem('userid'));
        
     })
   }
   displayorders(argguments: any) {
     let payload = {
 
-      "u_id": this.uuid
+      "u_id": argguments
     }
 
     this.apiService.displayorders(payload).subscribe(res => {
@@ -47,8 +47,8 @@ export class MyordersComponent implements OnInit {
         this.total = this.total + data.total;
       })
 
-      this.authService.isLoggedIn.subscribe((status) => { 
-      })
+      // this.authService.isLoggedIn.subscribe((status) => { 
+      // })
 
     })
   }

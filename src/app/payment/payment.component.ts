@@ -64,6 +64,8 @@ export class PaymentComponent implements OnInit, AfterViewInit {
   case_id: any;
   set_cartid: any;
   customer_i: any;
+  shipid: any;
+  bilid: any;
 
 
   constructor(private apiService: ApiService, private authService: AuthService,
@@ -92,7 +94,8 @@ export class PaymentComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
 
     this.getCartId(localStorage.getItem('userid'));
-    
+    this.shipping_add_id(localStorage.getItem('userid'));
+    this.billing_add_id(localStorage.getItem('userid'));
 
 
     // var Stripe: any;
@@ -166,7 +169,14 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     }
     this.getCartItem();
 
-    this.getCheckoutAddress();
+    // this.getCheckoutAddress();
+
+    // this.shipping_add_id(localStorage.getItem('userid'));
+    // this.billing_add_id();
+
+
+
+
   }
 
 
@@ -174,45 +184,45 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     return this.paymentformgroup.controls
   }
 
-  async getMyCartList() {
-    this.response = []
-    this.apiService.getCartItemOfUser(localStorage.getItem('userid')).subscribe(async res => {
-      // this.cartId = res.data[0].id;
-      this.response = res.data
+  // async getMyCartList() {
+  //   this.response = []
+  //   this.apiService.getCartItemOfUser(localStorage.getItem('userid')).subscribe(async res => {
+  //     // this.cartId = res.data[0].id;
+  //     this.response = res.data
 
 
 
-      let crt = '';
-      for (var data of res.data) {
-        crt += data.id + ",";
-        this.cartId = crt;
+  //     let crt = '';
+  //     for (var data of res.data) {
+  //       crt += data.id + ",";
+  //       this.cartId = crt;
 
-        data.imageurl = this.imageurl + 'Products/' + data.product_image;
-        this.total += data.product_price * data.product_quantity;
-      }
+  //       data.imageurl = this.imageurl + 'Products/' + data.product_image;
+  //       this.total += data.product_price * data.product_quantity;
+  //     }
 
-      // If no product in cart then redirect to home screen
-      if (this.response.length == 0) {
-        this.router.navigate(['/'])
-      }
+  //     // If no product in cart then redirect to home screen
+  //     if (this.response.length == 0) {
+  //       this.router.navigate(['/'])
+  //     }
 
-      this.cartId = crt;
-      //this.response1 = await this.getTopicalFees();
-      this.response1 = 0;
+  //     this.cartId = crt;
+  //     //this.response1 = await this.getTopicalFees();
+  //     this.response1 = 0;
 
-      //this.response2 = await this.getLiveVisitForFee();
-      this.response2 = 0;
-
-
-      this.minAmountShipping = await this.getMinimumShippingAmount();
-      this.calculateSubTotal();
-      // this.case_id = await this.getCaseId();
-    })
-
-    console.log('dekhh idhararrrr', this.cartId)
+  //     //this.response2 = await this.getLiveVisitForFee();
+  //     this.response2 = 0;
 
 
-  }
+  //     this.minAmountShipping = await this.getMinimumShippingAmount();
+  //     this.calculateSubTotal();
+  //     // this.case_id = await this.getCaseId();
+  //   })
+
+  //   console.log('dekhh idhararrrr', this.cartId)
+
+
+  // }
   // function at radio button
   AddBillingAddress_show(event: any) {
     if (event.target.checked == true) {
@@ -229,94 +239,105 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     }
   }
 
-  plus(cart_id: any, index: any) {
+  // plus(cart_id: any, index: any) {
 
-    this.response[index].product_quantity += 1
-    let data = {
-      quantity: this.response[index].product_quantity,
-    }
-    this.apiService.updateCartItemOfUser(cart_id, data).subscribe(res => {
+  //   this.response[index].product_quantity += 1
+  //   let data = {
+  //     quantity: this.response[index].product_quantity,
+  //   }
+  //   this.apiService.updateCartItemOfUser(cart_id, data).subscribe(res => {
 
-      // if (res) {
-      //   this.apiService.setActiveAccountNumber(this.response);
+  //     // if (res) {
+  //     //   this.apiService.setActiveAccountNumber(this.response);
 
-      // }
-    }, err => {
+  //     // }
+  //   }, err => {
 
-    });
-    this.calculateSubTotal();
-  }
+  //   });
+  //   this.calculateSubTotal();
+  // }
 
-  minus(cart_id: any, index: any) {
+  // minus(cart_id: any, index: any) {
 
-    if (this.response[index].product_quantity - 1 < 1) {
-      this.response[index].product_quantity = 1
-    } else {
-      this.response[index].product_quantity -= 1;
-    }
-    let data = {
-      quantity: this.response[index].product_quantity,
-    }
-    this.apiService.updateCartItemOfUser(cart_id, data).subscribe(res => {
-      console.log(res);
+  //   if (this.response[index].product_quantity - 1 < 1) {
+  //     this.response[index].product_quantity = 1
+  //   } else {
+  //     this.response[index].product_quantity -= 1;
+  //   }
+  //   let data = {
+  //     quantity: this.response[index].product_quantity,
+  //   }
+  //   this.apiService.updateCartItemOfUser(cart_id, data).subscribe(res => {
+  //     console.log(res);
 
-      // if (res) {
-      //   this.apiService.setActiveAccountNumber(this.response);
+  //     // if (res) {
+  //     //   this.apiService.setActiveAccountNumber(this.response);
 
-      // }
-    }, _err => {
+  //     // }
+  //   }, _err => {
 
-    });
-    this.calculateSubTotal();
-  }
-
-
-
-  async calculateSubTotal() {
-    var price = 0;
-    var price_non_pre_product = 0;
-
-    for (let p of this.response) {
-      price += (p.product_price * p.product_quantity);
-      price_non_pre_product += (p.product_price * p.product_quantity);
-
-    }
-    console.log('price', price);
-    console.log('this.minAmountShipping', this.minAmountShipping);
-
-    if (price < this.minAmountShipping) {
-      this.shipping = await this.getShippingFees();
-    } else {
-      this.shipping = 0;
-    }
-
-    this.taxes = await this.getTaxJar();
-    console.log('this.taxes', this.taxes);
-
-    let cal = this.response1 + this.response2 + this.shipping + this.taxes - this.discount
-    price += cal;
+  //   });
+  //   this.calculateSubTotal();
+  // }
 
 
-    let cal_price_non_pre_product = this.response1 + this.response2;
-    price_non_pre_product += cal_price_non_pre_product;
 
-    console.log("Total price::----", price)
-    this.Price = price;
+  // async calculateSubTotal() {
+  //   var price = 0;
+  //   var price_non_pre_product = 0;
 
-    this.Price_non_pre_product = price_non_pre_product
-  }
+  //   for (let p of this.response) {
+  //     price += (p.product_price * p.product_quantity);
+  //     price_non_pre_product += (p.product_price * p.product_quantity);
+
+  //   }
+  //   console.log('price', price);
+  //   console.log('this.minAmountShipping', this.minAmountShipping);
+
+  //   if (price < this.minAmountShipping) {
+  //     this.shipping = await this.getShippingFees();
+  //   } else {
+  //     this.shipping = 0;
+  //   }
+
+  //   this.taxes = await this.getTaxJar();
+  //   console.log('this.taxes', this.taxes);
+
+  //   let cal = this.response1 + this.response2 + this.shipping + this.taxes - this.discount
+  //   price += cal;
+
+
+  //   let cal_price_non_pre_product = this.response1 + this.response2;
+  //   price_non_pre_product += cal_price_non_pre_product;
+
+  //   console.log("Total price::----", price)
+  //   this.Price = price;
+
+  //   this.Price_non_pre_product = price_non_pre_product
+  // }
   getCartId(argguments: any) {
 
-    this.a = this.uuid;
+    // this.a = this.uuid;
     let payload = {
-      u_id: this.uuid
+      u_id: argguments
     }
     this.apiService.cartid(payload).subscribe((res: any) => {
       console.log('cartids', res);
       this.cid = res.data
     })
   }
-  async place_order() {
+
+
+
+
+
+
+
+
+
+
+
+  async place_order_a() {
 
     this.submitted = true
 
@@ -335,7 +356,8 @@ export class PaymentComponent implements OnInit, AfterViewInit {
             "u_id": localStorage.getItem('userid'),
             // cartid
             // "u_id": this.uuid,
-            "c_id": localStorage.getItem('cartid'),
+            // "c_id": localStorage.getItem('cartid'),
+                "c_id":this.cid,
             "first_name": this.paymentformgroup.value.first_name,
             "last_name": this.paymentformgroup.value.last_name,
             "addres": this.paymentformgroup.value.addres,
@@ -347,7 +369,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
             "city_code": this.paymentformgroup.value.city_code,
             "email": this.paymentformgroup.value.email,
             "phone_number": this.paymentformgroup.value.phone_number,
-            "address_type": "2",
+            // "address_type": "2",
             "token": localStorage.getItem('token'),
 
           }
@@ -366,7 +388,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         
             this.apiService.create_cus_id(payload2).subscribe(res =>{
                 console.log('customer id',res.data.id)
-                this.customer_i = res.data.id;
+                let cusid = res.data.id
                 if(res.data !== null){
                   let payload3 = {
                     "id":this.user_id,
@@ -375,9 +397,26 @@ export class PaymentComponent implements OnInit, AfterViewInit {
                   console.log('payload3',payload3)
                   this.apiService.store_cusid(payload3).subscribe(res =>{
                       console.log("data stored",res)
-                      if(res.data === 1){
-                      
-                       this.router.navigate(['/ordercomplete', this.a]);
+                      if(res.data !== null){
+                        let payload4 ={
+             
+                          "u_id":this.user_id,
+                          "c_id":this.cid,
+                          "card_id":cusid,
+                          "order_status":"done",
+                          "payment_status":"done",
+                          "ship_add_id":this.bilid
+                    }
+        
+                   
+        
+                              this.apiService.placeorder(payload4).subscribe(res=>{
+                                if(res.data !== null){
+                                  this.router.navigate(['/ordercomplete', this.user_id]);
+                                }
+                              })
+                    
+                      //  this.router.navigate(['/ordercomplete', this.a]);
                       }
                   })
                 }else{
@@ -398,6 +437,14 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     //same shipping address
     else {
 
+    
+ 
+
+
+
+
+
+
       console.log('kuch nhi', this.paymentformgroup.value.shiping_add)
       let token = await this.createToken();
       console.log('tokennnnn', token);
@@ -411,6 +458,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
     this.apiService.create_cus_id(payload2).subscribe(res =>{
       console.log('customer id',res.data.id)
+      let cusid = res.data.id
       if(res.data !== null){
         let payload3 ={
           "id":this.user_id,
@@ -418,8 +466,25 @@ export class PaymentComponent implements OnInit, AfterViewInit {
         }
         this.apiService.store_cusid(payload3).subscribe(res => {
           if(res.data !== null){
-                      
-            this.router.navigate(['/ordercomplete', this.user_id]);
+
+            let payload4 ={
+             
+                  "u_id":this.user_id,
+                  "c_id":this.cid,
+                  "card_id":cusid,
+                  "order_status":"done",
+                  "payment_status":"done",
+                  "ship_add_id":this.shipid
+            }
+
+           
+
+                      this.apiService.placeorder(payload4).subscribe(res=>{
+                        if(res.data !== null){
+                          this.router.navigate(['/ordercomplete', this.user_id]);
+                        }
+                      })
+            
            }
         })
       }
@@ -463,7 +528,40 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
   }
 
+  // shipping_add_id(argguments:any){
 
+  //   let payload ={
+  //     id:argguments
+  //   }
+  //   this.apiService.ship_id_id(payload).subscribe((res:any)=>{
+  //     console.log('shipppppppppppppppppppp id',res)
+  //     this.shipid = res.data
+  //   })
+  // }
+
+  shipping_add_id(argguments: any) {
+
+    // this.a = this.uuid;
+    let payload = {
+      u_id: argguments
+    }
+    this.apiService.ship_id_id(payload).subscribe((res: any) => {
+      console.log('shipppiingggg', res);
+      this.shipid = res.data.id
+    })
+  }
+
+  billing_add_id(argguments:any){
+    let payload = {
+      u_id: argguments
+    }
+    this.apiService.bill_id_id(payload).subscribe((res: any) => {
+      console.log('billiiiingggggg', res);
+      this.bilid = res.data.id
+    })
+  }
+
+  
   getMinimumShippingAmount() {
     // return new Promise((resolve) => {
     //   this.apiService.getMinimumShippingAmount().subscribe((res: { data: { amount: any; }; }) => {
@@ -535,31 +633,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/checkout']);
   }
 
-  getCheckoutAddress() {
-    console.log('mm')
-    let data = {
-      user_id: localStorage.getItem('userid')
-    }
-    let userEmail: any;
-    this.apiService.getUserById(localStorage.getItem('userid')).subscribe((res: any) => {
-      this.user = res.data;
-      userEmail = res.data.email;
-    });
-    this.apiService.getCheckoutAddress(data).subscribe((res: any) => {
-      console.log('test----', res);
-      this.addressResponse = res.data;
-      this.set_cartid = localStorage.setItem('cartid', this.addressResponse.cart_id)
-
-      console.log('after', this.addressResponse);
-      console.log('after', this.addressResponse);
-      this.billingaddressForm.patchValue({
-        firstName: res.data.patient_firstname,
-        lastName: res.data.patient_lastname,
-        emailAddress: !res.data.email ? userEmail : res.data.email,
-        phoneNumber: res.data.phone
-      })
-    });
-  }
+  
 
   // getCartItem() {
   //   if (this.loggedIn === true) {

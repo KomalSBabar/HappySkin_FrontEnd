@@ -3,3 +3,6 @@
     cursor: pointer;
     justify-content: space-between;
 }  
+.container-fluid{
+background-color: #e9dcdc;
+}

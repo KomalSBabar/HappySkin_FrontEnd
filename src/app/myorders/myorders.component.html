@@ -1,17 +1,17 @@
 <div class="sidebar">
-  <a routerLink="/about" class="col">About</a>
+  <!-- <a routerLink="/about" class="col">About</a> -->
   <a class="active" routerLink="/home">Home</a>
   <a routerLink="/profile">Profile</a>
   <a routerLink="/orders">Orders</a>
-  <a routerLink="/dashboardshipments">Shipments</a>
-  <a routerLink="/logout">Logout</a>
+  <!-- <a routerLink="/dashboardshipments">Shipments</a> -->
+  <!-- <a routerLink="/logout">Logout</a>ss -->
 
 </div>
 
 
 
 
-<div class="container px-3 my-5 clearfix">
+<div class="container px-3 my-5 clearfix"  style="margin-left: 191px; height: 100vh;"  >
     <!-- Shopping cart table -->
     <div class="card">
         <div class="card-header">
@@ -65,10 +65,7 @@
             <!-- / Shopping cart table -->
         
             <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
-              <div class="mt-4">
-                <label class="text-muted font-weight-normal">Promocode</label>
-                <input type="text" placeholder="ABC" class="form-control">
-              </div>
+            
               <div class="d-flex">
                 <div class="text-right mt-4 mr-5">
                   <!-- <label class="text-muted font-weight-normal m-0">Discount</label>
@@ -99,26 +96,32 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-            <tr *ngFor="let pro of list;">
+        <div class="modal-body"  *ngFor="let pro of list;"  >
+            <tr>
                 <td class="p-4">
                   <div class="media align-items-center"  >
                     <!-- product image -->
                     <img style="height: 25px;" src="{{imageDirectorypath}}{{pro.image_url}}" class="d-block ui-w-40 ui-bordered mr-4" alt="">
                     <div class="media-body">
                         <!-- product name -->
-                      <a href="#" class="d-block text-dark">Product Name : {{pro.title}}</a>
-                    
+                   
                     </div>
-                  </div>
+                  </div>s
                 </td>
                 <td class="text-right font-weight-semibold align-middle p-4">{{pro.price}}</td>
-                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="{{pro.qty}}" ></td>
-                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="{{pro.status}}" ></td>
+                <td class="align-middle p-4"><p >>value="{{pro.category}}" ></p></td>
+                <td class="align-middle p-4">
                 <td class="text-right font-weight-semibold align-middle p-4">{{pro.qty * pro.price | currency:'₹'}}</td>
                 
               </tr>
-
+              <tr>
+                <a href="#" class="d-block text-dark">Product Name : {{pro.title}}</a>
+                
+              </tr>
+              <tr>
+                <a href="#" class="d-block text-dark">Product Name : {{pro.short_description}}</a>
+                <a href="#" class="d-block text-dark">Product Name : {{pro.detail}}</a>
+              </tr>
 
 
         </div>

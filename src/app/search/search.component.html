@@ -13,3 +13,47 @@
     </ng-template>
  </ng-container> --> 
  <p>search works</p>
+ <div class="container">
+   <div class="container">
+      <!-- <h3 class="title sp-475" style="   font-weight: 500; font-size: xx-large;"></h3> -->
+      <div class="row wraping-step howowrk">
+         <div class="col-md-4"  *ngFor="let pro of productlist"   >
+            <div class="feature-box ">
+               <div class="feature-step ">
+                  
+                  <img class="img-fluid"  src="{{imageDirectorypath}}{{pro.image_url}}" alt="answer"
+                     style="max-width: 51%;">
+               </div>
+               <div class="feature-detail">
+                  <h6 class="price_textt " style="color: #050505;"    >Price : <span style="color: #f75261;"> $ {{pro.price}}</span></h6>
+      
+                  <h1 class="p-detail">{{pro.title}}</h1>
+                  <h1 class="p-detail-d">{{pro.short_description}}</h1>
+               </div>
+               <div *ngIf="pro.category == 'prescribed' ">
+                  <button class="price_text_atc atc">Learn More</button>
+               </div>
+              
+               <div *ngIf="pro.category != 'prescribed'&& !loginStatus  ">
+                 
+                     <!-- <button class="price_text_atc atc"
+                  (click)="addtocartlocal(pro.id)"
+                     [routerLink]="['/reg']">buy </button> -->
+   
+                     <button class="price_text_atc atc" (click)="pro_cart(pro)"
+                     [routerLink]="['/shippingcart']">add to cart </button>
+               </div>
+               <div *ngIf="pro.category != 'prescribed' && loginStatus ">
+                  <button class="price_text_atc atc"
+                  (click)="addtocartlocal(pro.id)"
+                     [routerLink]="['/reg']">buy </button>
+                     <!-- <button class="price_text_atc atc" (click)="pro_cart(pro)"
+                     [routerLink]="['/shippingcart']">add to cart </button> -->
+               </div>
+            </div>
+         </div>
+        
+        
+      </div>
+   </div>
+   </div>

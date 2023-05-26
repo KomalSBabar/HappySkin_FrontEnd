@@ -64,6 +64,14 @@ export class ApiService {
 
   }
 
+  billing_address(payload:any):Observable<any>{
+    let apiurl = this.baseurl + 'shipping_address';
+    return this.httpClient.post(apiurl,payload, this['httpOption'])
+  }
+
+
+
+
   displaycart(payload: any): Observable<any> {
     let apiurl = this.baseurl + 'cart';
     return this.httpClient.post(apiurl, payload, this['httpOption'])
@@ -155,7 +163,7 @@ export class ApiService {
    }
 
    public addAddress(payload:any) {
-    let apiurl = this.baseurl+'billing_add';
+    let apiurl = this.baseurl+'shipping_address';
 		return this.httpClient.post<any>(apiurl, payload, { headers: this.httpOption })
 			.pipe(map(data => {
 				return data;
@@ -177,7 +185,31 @@ export class ApiService {
       return data;
     }));
   }
+
+  question_res(payload:any):Observable<any>{
+    let apiurl = this.baseurl+'qa';
+    return this.httpClient.post<any>(apiurl,payload, {headers:this.httpOption})
+    .pipe(map(data => {
+      return data;
+    }));
+  }
+
+
+
   
+  ship_id_id(payload:any):Observable<any>{
+    let apiurl = this.baseurl+'ship_id';
+    return this.httpClient.post(apiurl,payload,this['httpOption'])
+   } 
+
+   bill_id_id(payload:any):Observable<any>{
+    let apiurl = this.baseurl+'bill_id';
+    return this.httpClient.post(apiurl,payload,this['httpOption'])
+   } 
+
+
+
+
   //  ch
  
 

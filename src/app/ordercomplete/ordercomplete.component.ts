@@ -32,10 +32,10 @@ export class OrdercompleteComponent implements OnInit {
   }
 
   getCartId(argguments:any){
-    this.a = this.user_id;
+    // this.a = argguments;
   
   let payload={
-    u_id :this.a
+    u_id :argguments
   }
   this.apiService.cartid(payload).subscribe((res:any)=>{
     this.cid = res.data
@@ -47,7 +47,7 @@ export class OrdercompleteComponent implements OnInit {
   getOrderNumber(argguments:any){
     let payload = {
       "u_id":this.user_id,
-      "c_id":this.cid
+      "c_id":argguments
     }
     this.apiService.getordnumber(payload).subscribe((res:any)=>{
       this.ordernumber =res.data.order_number
